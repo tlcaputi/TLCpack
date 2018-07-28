@@ -2,7 +2,7 @@
 #'
 #' This function provides simulation-based risk ratios from a regression that involves factors. 
 #' @param ind_var_group The factor variable for which you want an estimate 
-#' @param ind_var_value The value of ind_var_group that will be evaluated. Default set at 1 (100%).
+#' @param ind_var_value The value of ind_var_group that will be evaluated. Default set at 1.
 #' @param zero_out The factor variable for which we want to zero-out all other possibilities. 
 #' @param dep_var Dependent variable
 #' @param other_variables What other confounders do you want to include in the model
