@@ -1,5 +1,7 @@
 # pacman::p_load(devtools)
-# devtools::install_github("klutometis/roxygen")
+
+if ( !require(devtools) ) install.packages("devtools")
+if ( !require(roxygen2) ) devtools::install_github("klutometis/roxygen")
 library(devtools)
 library(roxygen2)
 
@@ -8,4 +10,5 @@ if(!dir.exists("tlcPack")) create("tlcPack")
 
 setwd("./tlcPack")
 document()
+
 
