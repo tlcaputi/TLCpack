@@ -1,4 +1,4 @@
-#' newZelig with an interaction term.
+#' newZelig with an interaction term
 #'
 #' This function dichotomizes variables while including a column for NAs.
 #' @param data Dataset from which you are pulling variables

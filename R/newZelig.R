@@ -1,4 +1,4 @@
-#' NewZelig
+#' newZelig
 #'
 #' This function provides simulation-based risk ratios from a regression that involves factors. 
 #' @param ind_var_group The factor variable for which you want an estimate 
