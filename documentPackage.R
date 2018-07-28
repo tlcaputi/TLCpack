@@ -11,4 +11,6 @@ if(!dir.exists("tlcPack")) create("tlcPack")
 setwd("./tlcPack")
 document()
 
+print("Documentation process successful.")
+
 
