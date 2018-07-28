@@ -2,3 +2,5 @@
 
 export(cd)
 export(dichNA)
+export(newZelig)
+export(newZeligIntX)

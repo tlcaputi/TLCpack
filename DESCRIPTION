@@ -1,10 +1,15 @@
 Package: tlcPack
-Title: What the Package Does (one line, title case)
+Title: Functions for Theodore Caputi
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person("Theodore", "Caputi", email = "tcaputi@gmail.com", role = c("aut", "cre"))
+Description: This is the personal R package for Theodore Caputi.
 Depends: R (>= 3.5.0)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0
+Imports:
+    pacman,
+    survey,
+    MASS,
+    netCoin
