@@ -8,7 +8,6 @@ git commit -m %_inputname%
 git remote add origin https://github.com/tlcaputi/tlcPack.git
 git push -u origin master
 
-
 pause
 
 ::@echo off
