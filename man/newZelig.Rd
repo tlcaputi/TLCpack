@@ -15,7 +15,7 @@ newZelig(ind_var_group, ind_var_value = 1, zero_out = NULL, dep_var,
 \arguments{
 \item{ind_var_group}{The factor variable for which you want an estimate}
 
-\item{ind_var_value}{The value of ind_var_group that will be evaluated. Default set at 1 (100%).}
+\item{ind_var_value}{The value of ind_var_group that will be evaluated. Default set at 1.}
 
 \item{zero_out}{The factor variable for which we want to zero-out all other possibilities.}
 
