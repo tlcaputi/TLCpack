@@ -2,7 +2,7 @@
 % Please edit documentation in R/newZeligX.R
 \name{newZeligIntX}
 \alias{newZeligIntX}
-\title{newZelig with an interaction term.}
+\title{newZelig with an interaction term}
 \usage{
 newZeligIntX(ind_var_group1, ind_var_value1, ind_var_group2,
   ind_var_value2, zero_out, dep_var, other_variables, factor_variables,

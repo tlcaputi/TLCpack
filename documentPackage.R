@@ -4,7 +4,7 @@ library(devtools)
 library(roxygen2)
 
 setwd("C:/Users/tcapu/Google Drive")
-create("tlcPack")
+if(!dir.exists("tlcPack")) create("tlcPack")
 
 setwd("./tlcPack")
 document()

@@ -2,7 +2,7 @@
 % Please edit documentation in R/newZelig.R
 \name{newZelig}
 \alias{newZelig}
-\title{NewZelig}
+\title{newZelig}
 \usage{
 newZelig(ind_var_group, ind_var_value = 1, zero_out = NULL, dep_var,
   other_variables, factor_variables, .id = NULL, .weight = NULL,
