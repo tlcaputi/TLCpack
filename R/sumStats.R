@@ -3,12 +3,12 @@
 #' This function creates a table of summary statistics. 
 #' @param x Data vector 
 #' @param name The name of the vector you're interested in
-#' @keywords summary statistics
+#' @keywords summary
 #' @export 
 #' @examples
-#' with(y,do.call(rbind.data.frame,list(ss(age,"age"),ss(cohort),ss(gender), ss(smoker),ss(sbp,"sbp"),ss(choliu,"choliu"),ss(cvd,"cvd"))))
-
-ss = function(x,name=""){
+#'  ss(x$gender,name="gender")
+#'  
+sumStats = function(x,name=""){
   
   r = function(x) round(x,3) #this makes it easier to round things
   if(is.numeric(x)){ # for variables that are numeric
