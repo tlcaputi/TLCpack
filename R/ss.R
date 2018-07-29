@@ -8,11 +8,6 @@
 #' @examples
 #' with(y,do.call(rbind.data.frame,list(ss(age,"age"),ss(cohort),ss(gender), ss(smoker),ss(sbp,"sbp"),ss(choliu,"choliu"),ss(cvd,"cvd"))))
 
-
-## This is a program that gives us the summary stats (N, Mean, SD, SE, and 95%CI
-## for a given vector. We will use it to generate descriptive stats throughout 
-## the exercise.
-
 ss = function(x,name=""){
   
   r = function(x) round(x,3) #this makes it easier to round things
@@ -47,3 +42,4 @@ ss = function(x,name=""){
     return(tab) 
   }
 }
+
