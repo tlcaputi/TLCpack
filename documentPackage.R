@@ -1,5 +1,3 @@
-# pacman::p_load(devtools)
-
 if ( !require(devtools) ) install.packages("devtools")
 if ( !require(roxygen2) ) devtools::install_github("klutometis/roxygen")
 library(devtools)
