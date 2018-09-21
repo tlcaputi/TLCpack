@@ -1,14 +1,15 @@
 @echo off
 
-SET /P _inputname= Please enter an input:
+SET /P _inputname= Please enter commit message:
 cd C:/Users/tcapu/Google Drive/tlcPack
-Rscript documentPackage.r
+R CMD BATCH documentPackage.R
 echo "Documentation updated."
 git init
 git add .
-git commit -m %_inputname%
-git remote add origin https://github.com/tlcaputi/tlcPack.git
-git push -u origin master
+git commit -m "%_inputname%"
+:: git remote add origin https://github.com/tlcaputi/tlcPack.git
+git push
+:: -u origin master
 pause
 
 ::@echo off
