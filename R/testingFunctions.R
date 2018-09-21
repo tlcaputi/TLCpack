@@ -16,7 +16,6 @@ testOutside <- function(data, string="http://co.milesplit.com/meets/<TEST>", sam
   missing_ids <- poss_ids[!(poss_ids %in% data)]
   set.seed(1234)
   test_set <- sample(missing_ids, 100000, replace=F)
-
   if (!is.null(start)) assign("wefrdbhjuifbedjhi", start, envir=.GlobalEnv)
   if(!exists("wefrdbhjuifbedjhi", envir=.GlobalEnv)) {
     assign("wefrdbhjuifbedjhi", 0, envir=.GlobalEnv)
@@ -46,21 +45,23 @@ testOutside <- function(data, string="http://co.milesplit.com/meets/<TEST>", sam
 #'  testInside(y$meetid, col="schoolid", string="http://co.milesplit.com/teams/<TEST>", sample=1, test=F)
 #'
 
+
 testInside <- function(data, col="schoolid", string="http://co.milesplit.com/teams/<TEST>", sample=1, start=NULL, test=F){
   set.seed(1234)
-  test_set <- sample(data[,col], 1000, replace=F)
+  test_rows <- sample(1:nrow(data), 1000, replace=F)
+  test_set <- data[test_rows, ]
   if (!is.null(start)) assign("nhjdr4nh3498n43h289", start, envir=.GlobalEnv)
   if(!exists("nhjdr4nh3498n43h289", envir=.GlobalEnv)) {
     assign("nhjdr4nh3498n43h289", 0, envir=.GlobalEnv)
   } else{
     assign("nhjdr4nh3498n43h289", .GlobalEnv$nhjdr4nh3498n43h289 + sample, envir=.GlobalEnv)
   }
-  test_ids <- test_set[(nhjdr4nh3498n43h289-sample+1):nhjdr4nh3498n43h289]
+  test_ids <- test_set[(nhjdr4nh3498n43h289-sample+1):nhjdr4nh3498n43h289, col]
   for (i in test_ids){
     url <- gsub("<TEST>",i, string)
     if (!test) browseURL(url, browser = getOption("browser"), encodeIfNeeded = FALSE)
   }
-  head(data[data[,col] %in% test_ids, ], sample)
+  head(test_set[(nhjdr4nh3498n43h289-sample+1):nhjdr4nh3498n43h289, ], sample)
 }
 
 #' Read Pipe Delimited Files
