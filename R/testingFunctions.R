@@ -18,7 +18,7 @@ testOutside <- function(data, string="http://co.milesplit.com/meets/<TEST>", sam
   test_set <- sample(missing_ids, 100000, replace=F)
   if (!is.null(start)) assign("wefrdbhjuifbedjhi", start, envir=.GlobalEnv)
   if(!exists("wefrdbhjuifbedjhi", envir=.GlobalEnv)) {
-    assign("wefrdbhjuifbedjhi", 0, envir=.GlobalEnv)
+    assign("wefrdbhjuifbedjhi", 1, envir=.GlobalEnv)
   } else{
     assign("wefrdbhjuifbedjhi", .GlobalEnv$wefrdbhjuifbedjhi + sample, envir=.GlobalEnv)
   }
@@ -52,7 +52,7 @@ testInside <- function(data, col="schoolid", string="http://co.milesplit.com/tea
   test_set <- data[test_rows, ]
   if (!is.null(start)) assign("nhjdr4nh3498n43h289", start, envir=.GlobalEnv)
   if(!exists("nhjdr4nh3498n43h289", envir=.GlobalEnv)) {
-    assign("nhjdr4nh3498n43h289", 0, envir=.GlobalEnv)
+    assign("nhjdr4nh3498n43h289", 1, envir=.GlobalEnv)
   } else{
     assign("nhjdr4nh3498n43h289", .GlobalEnv$nhjdr4nh3498n43h289 + sample, envir=.GlobalEnv)
   }

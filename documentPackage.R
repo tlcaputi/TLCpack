@@ -12,4 +12,4 @@ document()
 print("Documentation process successful.")
 
 
-
+search()
