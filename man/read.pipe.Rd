@@ -15,7 +15,7 @@ This function creates a table of summary statistics.
 }
 \examples{
  read.pipe(filename)
- 
+
 }
 \keyword{pipe}
 \keyword{read}

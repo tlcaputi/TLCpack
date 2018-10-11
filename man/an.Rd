@@ -14,6 +14,6 @@ This function creates a table of summary statistics.
 }
 \examples{
  an("45678")
- 
+
 }
 \keyword{summary}

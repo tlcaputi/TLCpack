@@ -6,7 +6,7 @@
 \usage{
 testInside(data, col = "schoolid",
   string = "http://co.milesplit.com/teams/<TEST>", sample = 1,
-  test = F)
+  start = NULL, test = F)
 }
 \arguments{
 \item{data}{Dataframe}
@@ -24,5 +24,5 @@ This function creates a table of summary statistics.
 }
 \examples{
  testInside(y$meetid, col="schoolid", string="http://co.milesplit.com/teams/<TEST>", sample=1, test=F)
- 
+
 }

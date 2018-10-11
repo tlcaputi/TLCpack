@@ -5,7 +5,7 @@
 \title{Test what's not in the list}
 \usage{
 testOutside(data, string = "http://co.milesplit.com/meets/<TEST>",
-  sample = 20, test = F)
+  sample = 20, start = NULL, test = F)
 }
 \arguments{
 \item{data}{Data vector}
@@ -21,5 +21,5 @@ This function creates a table of summary statistics.
 }
 \examples{
  testOutside(y$meetid, string="http://co.milesplit.com/meets/<TEST>", sample=20, test=F)
- 
+
 }
