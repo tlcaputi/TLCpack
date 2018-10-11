@@ -3,7 +3,7 @@ Title: Functions for Theodore Caputi
 Version: 0.0.0.9000
 Authors@R: person("Theodore", "Caputi", email = "tcaputi@gmail.com", role = c("aut", "cre"))
 Description: This is the personal R package for Theodore Caputi.
-Depends: R (>= 3.5.0)
+Depends: R (>= 3.4.0)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
