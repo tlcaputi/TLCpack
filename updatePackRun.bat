@@ -2,7 +2,7 @@
 
 SET /P _inputname= Please enter commit message:
 cd C:/Users/tcapu/Google Drive/tlcPack
-R CMD BATCH documentPackage.R
+"Rscript.exe" "C:/Users/tcapu/Google Drive/tlcPack/documentPackage.r"
 echo "Documentation updated."
 git init
 git add .
