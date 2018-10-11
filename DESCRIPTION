@@ -11,5 +11,17 @@ Imports:
     pacman,
     survey,
     MASS,
-    netCoin
+    netCoin,
+    feather,
+    tm,
+    dplyr,
+    readr,
+    data.table,
+    lubridate,
+    reshape,
+    stringr,
+    svMisc,
+    plyr,
+    dplyr,
+    tidyr
 RoxygenNote: 6.1.0
