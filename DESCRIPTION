@@ -23,5 +23,6 @@ Imports:
     svMisc,
     plyr,
     dplyr,
-    tidyr
+    tidyr,
+    haven
 RoxygenNote: 6.1.0
