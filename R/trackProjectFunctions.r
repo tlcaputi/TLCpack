@@ -331,6 +331,18 @@ cleanData <- function(x){
 }
 
 
+#' Load Packages
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+load_packages <- function(){
+pacman::p_load(devtools, pacman, survey, MASS, netCoin, feather, tm,
+  dplyr, readr, data.table, lubridate, reshape, stringr, svMisc,
+  plyr, dplyr, tidyr, haven)
+}
+
 
 #' CSV to Feather (if necessary)
 #'
