@@ -339,7 +339,7 @@ cleanData <- function(x){
 #' @export
 #' @examples
 
-c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F){
+c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F){
   # f <- read.csv(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F)
   # assign(f, read.csv(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F), envir=.GlobalEnv)
   if(pipe){
@@ -350,7 +350,11 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F){
 
   if (clean) {
     print("reading from csv, cleaning, and writing to feather")
-    f <- read(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F)
+    if (txt){
+      f <- read(paste0(in_fn, ".txt"), header=T, stringsAsFactor=F)      
+    } else {
+      f <- read(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F)
+    }
     f <- cleanData(f)
     write_feather0(f, paste0(out_fn, ".feather"))
   } else {
