@@ -338,8 +338,8 @@ cleanData <- function(x){
 #' @export
 #' @examples
 load_packages <- function(){
-pacman::p_load(devtools, pacman, survey, MASS, netCoin, feather, tm,
-  dplyr, readr, data.table, lubridate, reshape, stringr, svMisc,
+pacman::p_load(devtools, survey, MASS, netCoin, feather, tm,
+  readr, data.table, lubridate, reshape, stringr, svMisc,
   plyr, dplyr, tidyr, haven)
 }
 
