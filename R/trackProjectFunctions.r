@@ -225,9 +225,6 @@ unique00 <- function(x, an=T){
 
 
 separate0 <- function(data, col_to_split, sep){
-  if (!require(pacman)) install.packages("pacman")
-  pacman::p_load(dplyr, tidyr, stringr)
-
   num_names = max(str_count(data[,col_to_split], sep), na.rm=T) + 1
   new_col_names <- paste0(col_to_split, 1:num_names)
   return(separate(data, col_to_split, new_col_names, sep))
@@ -262,6 +259,7 @@ wn <- function(x){
   ax <- sapply(as.numeric(x), FUN = function(h) strsplit(as.character(h), "[.]")[[1]][1])
   return(as.character(ax))
 }
+
 
 
 #' Comprehensively clean/standardize data
