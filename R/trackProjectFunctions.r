@@ -173,7 +173,7 @@ cleanData <- function(x){
      "highschool", "senior", "sr", "schl")){
       pat <- paste0("\\<", q, "\\>")
       print0(paste0("removing ", pat))
-      x$school<- gsub(pat, "", x$school)
+      x$unischool<- gsub(pat, "", x$school)
     }
   }
 
