@@ -91,10 +91,10 @@ wordExists <- function(pattern, string){
 
 
 fnFinder <- function(x){
-  if(wordExists(",",x)){
+  if(tlcPack::wordExists(",",x)){
     x <- gsub(",", " ,", x)
     comNum <- c()
-    for (r in 1:numWords(x)){
+    for (r in 1:tlcPack::numWords(x)){
       if ( word(x, r)==",") comNum <- c(comNum, r)
     }
     return(word(x, comNum[1] + 1))
@@ -116,7 +116,7 @@ fnFinder <- function(x){
 
 
 lnFinder <- function(x){
-  if(wordExists(",",x)){
+  if(tlcPack::wordExists(",",x)){
     x <- gsub(",", " ,", x)
     return(word(x, 1))
   } else {
@@ -135,10 +135,10 @@ lnFinder <- function(x){
 
 
 hypFinder <- function(x, before=T){
-  if(wordExists("-",x)){
+  if(tlcPack::wordExists("-",x)){
     x <- gsub("-", " - ", x)
     comNum <- c()
-    for (r in 1:numWords(x)){
+    for (r in 1:tlcPack::numWords(x)){
       if ( word(x, r)=="-") comNum <- c(comNum, r)
     }
     if (before){
@@ -271,62 +271,62 @@ wn <- function(x){
 
 
 cleanData <- function(x){
-  print0("renaming columns")
+  tlcPack::print0("renaming columns")
   names(x) <- tolower(names(x))
-  print0("to lower case")
+  tlcPack::print0("to lower case")
   x <- apply(x,2,tolower)
-  print0("to data frame")
+  tlcPack::print0("to data frame")
   x <- as.data.frame(x)
-  print0("school name procedure")
+  tlcPack::print0("school name procedure")
   if ("school" %in% names(x)){
     for (q in c("hs", "high", "school", "academy", "the", "a",
      "highschool", "senior", "sr", "schl")){
       pat <- paste0("\\<", q, "\\>")
-      print0(paste0("removing ", pat))
+      tlcPack::print0(paste0("removing ", pat))
       x$unischool<- gsub(pat, "", x$school)
     }
   }
 
-  print0("name procedure")
+  tlcPack::print0("name procedure")
   if ("name" %in% names(x)){
     nmNum <- which(names(x)=="name")[1]
     for (q in c("sr.", "sr", "senior", "jr.","jr","junior","mr.", "mrs.","ms.","miss",
                 "iii","ii","iv","v","vi","mr","mrs","ms")) {
                   pat <- paste0("\\<", q, "\\>")
-                  print0(paste0("removing ", pat))
+                  tlcPack::print0(paste0("removing ", pat))
                   x$name <- gsub(pat, "", x$name)
                 }
 
-    print0("first names")
+    tlcPack::print0("first names")
     x$firstname <- sapply(x$name, fnFinder)
-    print0("last names")
+    tlcPack::print0("last names")
     x$lastname <- sapply(x$name, lnFinder)
-    print0("uninames")
+    tlcPack::print0("uninames")
     x$uniname <- paste0(word(x$firstname, 1), " ", word(x$lastname, 1))
-    print0("before hyp")
-    x$beforehyp <- sapply(x$name, function(x) hypFinder(x, before=T))
-    print0("after hyp")
-    x$afterhyp <- sapply(x$name, function(x) hypFinder(x, before=F))
+    tlcPack::print0("before hyp")
+    x$beforehyp <- sapply(x$name, function(x) tlcPack::hypFinder(x, before=T))
+    tlcPack::print0("after hyp")
+    x$afterhyp <- sapply(x$name, function(x) tlcPack::hypFinder(x, before=F))
 
     nmNum <- which(names(x) %in% c("name", "firstname","lastname","uniname"))
-    print0("replacing hyps")
+    tlcPack::print0("replacing hyps")
     x[,-nmNum] <- apply(x[,-nmNum], 2, function(h) gsub("-", " ", h))
 
   } else {
     x <- apply(x, 2, function(h) gsub("-", " ", h))
   }
 
-  print0("removing punct")
+  tlcPack::print0("removing punct")
   x <- apply(x,2,function(h) removePunctuation(h))
-  print0("stripping white space")
+  tlcPack::print0("stripping white space")
   x <- apply(x,2,function(h) stripWhitespace(h))
-  print0("trimming white space")
+  tlcPack::print0("trimming white space")
   x <- apply(x,2,function(h) trimws(h))
-  print0("numbers only")
+  tlcPack::print0("numbers only")
   x <- apply(x,2,function(h) suppressWarnings(ifelse(numbers_only(h), as.numeric(as.character(h)), h)))
-  print0("fixing years")
-  x <- yrFun(x)
-  print0("done")
+  tlcPack::print0("fixing years")
+  x <- tlcPack::yrFun(x)
+  tlcPack::print0("done")
   return(as.data.frame(x))
 }
 
@@ -351,21 +351,21 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F){
   if (clean) {
     print("reading from csv, cleaning, and writing to feather")
     if (txt){
-      f <- read(paste0(in_fn, ".txt"), header=T, stringsAsFactor=F)      
+      f <- read(paste0(in_fn, ".txt"), header=T, stringsAsFactor=F)
     } else {
       f <- read(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F)
     }
-    f <- cleanData(f)
-    write_feather0(f, paste0(out_fn, ".feather"))
+    f <- tlcPack::cleanData(f)
+    tlcPack::write_feather0(f, paste0(out_fn, ".feather"))
   } else {
     feather_name <- paste0(in_fn,".feather")
     if(file.exists(feather_name)) {
       print("feather file already exists, just reading from disk")
-      f <- read_feather0(feather_name)
+      f <- tlcPack::read_feather0(feather_name)
     } else {
       print("file doesn't exist -- reading file from csv, writing to feather")
       f <- read(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F)
-      write_feather0(f, paste0(out_fn, ".feather"))
+      tlcPack::write_feather0(f, paste0(out_fn, ".feather"))
     }
   }
   return(f)
