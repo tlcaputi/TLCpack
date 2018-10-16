@@ -356,7 +356,7 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F){
       f <- read(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F)
     }
     f <- tlcPack::cleanData(f)
-    tlcPack::write_feather0(f, paste0(out_fn, ".feather"))
+    write_feather(f, paste0(out_fn, ".feather"))
   } else {
     feather_name <- paste0(in_fn,".feather")
     if(file.exists(feather_name)) {
@@ -365,7 +365,7 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F){
     } else {
       print("file doesn't exist -- reading file from csv, writing to feather")
       f <- read(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F)
-      tlcPack::write_feather0(f, paste0(out_fn, ".feather"))
+      write_feather(f, paste0(out_fn, ".feather"))
     }
   }
   return(f)
