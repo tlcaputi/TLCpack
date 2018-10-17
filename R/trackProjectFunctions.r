@@ -380,6 +380,8 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=1000
     read <- function(...) rd(...)
   }
 
+  # feather_name <- paste0(in_fn,".feather")
+
   if (clean) {
     print("reading from csv, cleaning, and writing to feather")
     if (txt){
@@ -390,13 +392,17 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=1000
     f <- tlcPack::cleanData(f)
     write_feather(f, paste0(out_fn, ".feather"))
   } else {
-    feather_name <- paste0(in_fn,".feather")
-    if(file.exists(feather_name)) {
+
+  if(file.exists(paste0(out_fn,".feather"))) {
       print("feather file already exists, just reading from disk")
-      f <- tlcPack::read_feather0(feather_name)
+      f <- tlcPack::read_feather0(paste0(out_fn,".feather"))
     } else {
       print("file doesn't exist -- reading file from csv, writing to feather")
-      f <- read(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F)
+      if (txt){
+        f <- read(paste0(in_fn, ".txt"), header=T, stringsAsFactor=F)
+      } else {
+        f <- read(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F)
+      }
       write_feather(f, paste0(out_fn, ".feather"))
     }
   }
