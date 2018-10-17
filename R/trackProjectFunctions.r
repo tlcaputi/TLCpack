@@ -298,7 +298,9 @@ cleanData <- function(x){
                 }
 
     tlcPack::print0("first names")
-    x$firstname <- sapply(x$name, fnFinder)
+    x$firstname <- sapply(x$name, function(x) {
+      fnFinder(x)
+    })
     tlcPack::print0("last names")
     x$lastname <- sapply(x$name, lnFinder)
     tlcPack::print0("uninames")
@@ -331,6 +333,18 @@ cleanData <- function(x){
 }
 
 
+
+#' select0
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+select0 <- function(x) as.data.frame(dplyr::select())
+
+
+
 #' Load Packages
 #'
 #' @param
@@ -351,13 +365,19 @@ pacman::p_load(devtools, survey, MASS, netCoin, feather, tm,
 #' @export
 #' @examples
 
-c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F){
+c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=, test_n=10000){
   # f <- read.csv(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F)
   # assign(f, read.csv(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F), envir=.GlobalEnv)
   if(pipe){
-    read <- function(...) read.pipe(...)
+    rd <- function(...) read.pipe(...)
   } else {
-    read <- function(...) read.csv(...)
+    rd <- function(...) read.csv(...)
+  }
+
+  if(test){
+    read <- function(...) dplyr::sample_n(rd(...), test_n)
+  } else {
+    read <- function(...) rd(...)
   }
 
   if (clean) {
