@@ -393,7 +393,7 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=1000
     write_feather(f, paste0(out_fn, ".feather"))
   } else {
 
-  if(file.exists(paste0(out_fn,".feather")) & read_in_feather=T) {
+  if(file.exists(paste0(out_fn,".feather")) & read_in_feather==T) {
       print("feather file already exists, just reading from disk")
       f <- tlcPack::read_feather0(paste0(out_fn,".feather"))
     } else {
