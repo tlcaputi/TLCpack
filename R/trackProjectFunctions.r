@@ -365,7 +365,7 @@ pacman::p_load(devtools, survey, MASS, netCoin, feather, tm,
 #' @export
 #' @examples
 
-c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=, test_n=10000){
+c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=10000){
   # f <- read.csv(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F)
   # assign(f, read.csv(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F), envir=.GlobalEnv)
   if(pipe){

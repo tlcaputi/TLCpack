@@ -4,7 +4,8 @@
 \alias{c2f}
 \title{CSV to Feather (if necessary)}
 \usage{
-c2f(in_fn, out_fn = in_fn, clean = F, pipe = F, txt = F)
+c2f(in_fn, out_fn = in_fn, clean = F, pipe = F, txt = F,
+  test = F, test_n = 10000)
 }
 \description{
 CSV to Feather (if necessary)
