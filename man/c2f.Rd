@@ -5,7 +5,7 @@
 \title{CSV to Feather (if necessary)}
 \usage{
 c2f(in_fn, out_fn = in_fn, clean = F, pipe = F, txt = F,
-  test = F, test_n = 1000, read_in_feather = T)
+  test = F, test_n = 1000, read_in_feather = T, na_rm_nameid = F)
 }
 \description{
 CSV to Feather (if necessary)

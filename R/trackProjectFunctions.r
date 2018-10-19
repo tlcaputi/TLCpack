@@ -365,7 +365,7 @@ pacman::p_load(devtools, survey, MASS, netCoin, feather, tm,
 #' @export
 #' @examples
 
-c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=1000, read_in_feather=T){
+c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=1000, read_in_feather=T, na_rm_nameid=F){
   # f <- read.csv(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F)
   # assign(f, read.csv(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F), envir=.GlobalEnv)
   if(pipe){
@@ -375,9 +375,15 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=1000
   }
 
   if(test){
-    read <- function(...) dplyr::sample_n(rd(...), test_n)
+    rd2 <- function(...) dplyr::sample_n(rd(...), test_n)
   } else {
-    read <- function(...) rd(...)
+    rd2 <- function(...) rd(...)
+  }
+
+  if(na_rm_nameid){
+    read <- function(...) dplyr::filter(rd2(...), !is.na(nameid))
+  } else {
+    read <- function(...) rd2(...)
   }
 
   # feather_name <- paste0(in_fn,".feather")
@@ -399,11 +405,11 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=1000
     } else {
       print("file doesn't exist -- reading file from csv, writing to feather")
       if (txt){
-        f <- read(paste0(in_fn, ".txt"), header=T, stringsAsFactor=F)
-      } else {
-        f <- read(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F)
-      }
-      write_feather(f, paste0(out_fn, ".feather"))
+          f <- read(paste0(in_fn, ".txt"), header=T, stringsAsFactor=F)
+        } else {
+          f <- read(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F)
+        }
+        write_feather(f, paste0(out_fn, ".feather"))
     }
   }
   return(f)
