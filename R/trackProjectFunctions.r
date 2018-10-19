@@ -1,4 +1,20 @@
 
+
+
+
+
+#' NA remover
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+
+na_omit <- function(x) x[!is.na(x)]
+
+
+
 #' Custom Read Feather
 #'
 #' @param
@@ -381,7 +397,11 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=1000
   }
 
   if(test){
-    read <- function(...) dplyr::sample_n(rd2(...), test_n)
+    read <- function(...) {
+      ax <- rd2(...)
+      sample_nameids <- sample(tlcPack::na_omit(ax$nameid), test_n)
+      ay <- ax[ax$nameid %in% sample_nameids,]
+      return(ay)
   } else {
     read <- function(...) rd2(...)
   }
@@ -390,7 +410,7 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=1000
   # feather_name <- paste0(in_fn,".feather")
 
   if (clean) {
-    print("reading from csv, cleaning, and writing to feather")
+    print("reading from csv or text, cleaning, and writing to feather")
     if (txt){
       f <- read(paste0(in_fn, ".txt"), header=T, stringsAsFactor=F)
     } else {
@@ -404,7 +424,7 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=1000
       print("feather file already exists, just reading from disk")
       f <- tlcPack::read_feather0(paste0(out_fn,".feather"))
     } else {
-      print("file doesn't exist -- reading file from csv, writing to feather")
+      print("file doesn't exist -- reading file from csv/text, NOT cleaning, and writing to feather")
       if (txt){
           f <- read(paste0(in_fn, ".txt"), header=T, stringsAsFactor=F)
         } else {
