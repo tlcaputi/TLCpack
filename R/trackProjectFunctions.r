@@ -374,17 +374,18 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=1000
     rd <- function(...) read.csv(...)
   }
 
-  if(test){
-    rd2 <- function(...) dplyr::sample_n(rd(...), test_n)
+  if(na_rm_nameid){
+    rd2 <- function(...) dplyr::filter(rd(...), !is.na(nameid))
   } else {
     rd2 <- function(...) rd(...)
   }
 
-  if(na_rm_nameid){
-    read <- function(...) dplyr::filter(rd2(...), !is.na(nameid))
+  if(test){
+    read <- function(...) dplyr::sample_n(rd2(...), test_n)
   } else {
     read <- function(...) rd2(...)
   }
+
 
   # feather_name <- paste0(in_fn,".feather")
 
