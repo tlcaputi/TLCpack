@@ -391,18 +391,23 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=1000
   }
 
   if(na_rm_nameid){
-    rd2 <- function(...) dplyr::filter(rd(...), !is.na(nameid))
+    rd2 <- function(...) {
+      wax <- rd(...)
+      way <- data.frame(dplyr::filter(ax, !is.na(nameid)))
+      return(way)
+    }
   } else {
-    rd2 <- function(...) rd(...)
+    rd2 <- function(...) data.frame(rd(...))
   }
 
   if(test){
     read <- function(...) {
       ax <- rd2(...)
       sample_nameids <- sample(tlcPack::na_omit(ax$nameid), test_n)
+      print(sample_nameids[1:20])
       ay <- ax[ax$nameid %in% sample_nameids,]
       return(ay)
-    }
+      }
     } else {
       read <- function(...) rd2(...)
     }
