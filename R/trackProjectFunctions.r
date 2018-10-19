@@ -402,9 +402,10 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=1000
       sample_nameids <- sample(tlcPack::na_omit(ax$nameid), test_n)
       ay <- ax[ax$nameid %in% sample_nameids,]
       return(ay)
-  } else {
-    read <- function(...) rd2(...)
-  }
+    }
+    } else {
+      read <- function(...) rd2(...)
+    }
 
 
   # feather_name <- paste0(in_fn,".feather")
