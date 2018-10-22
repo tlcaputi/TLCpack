@@ -1,8 +1,3 @@
-
-
-
-
-
 #' NA remover
 #'
 #' @param
@@ -381,7 +376,8 @@ pacman::p_load(devtools, survey, MASS, netCoin, feather, tm,
 #' @export
 #' @examples
 
-c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=1000, read_in_feather=T, na_rm_nameid=F){
+c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F,
+                test=F, test_n=1000, read_in_feather=T, na_rm_nameid=F){
   # f <- read.csv(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F)
   # assign(f, read.csv(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F), envir=.GlobalEnv)
   if(pipe){
@@ -393,7 +389,11 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=1000
   if(na_rm_nameid){
     rd2 <- function(...) {
       wax <- rd(...)
-      way <- data.frame(dplyr::filter(wax, !is.na(nameid)))
+      if("nameid" %in% names(wax)){
+        way <- data.frame(dplyr::filter(wax, !is.na(nameid)))
+      } else {
+        way <- wax
+      }
       return(way)
     }
   } else {
@@ -403,9 +403,13 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=1000
   if(test){
     read <- function(...) {
       ax <- rd2(...)
-      sample_nameids <- sample(tlcPack::na_omit(ax$nameid), test_n)
-      print(sample_nameids[1:20])
-      ay <- ax[ax$nameid %in% sample_nameids,]
+      if ("nameid" %in% names(ax)){
+        sample_nameids <- sample(tlcPack::na_omit(ax$nameid), test_n)
+        print(sample_nameids[1:20])
+        ay <- ax[ax$nameid %in% sample_nameids,]
+      } else {
+        ay <- ax
+      }
       return(ay)
       }
     } else {
@@ -426,7 +430,7 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=1000
     write_feather(f, paste0(out_fn, ".feather"))
   } else {
 
-  if(file.exists(paste0(out_fn,".feather")) & read_in_feather==T) {
+  if(file.exists(paste0(out_fn,".feather")) & read_in_feather) {
       print("feather file already exists, just reading from disk")
       f <- tlcPack::read_feather0(paste0(out_fn,".feather"))
     } else {
