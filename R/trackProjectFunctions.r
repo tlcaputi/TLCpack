@@ -393,7 +393,7 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F, test=F, test_n=1000
   if(na_rm_nameid){
     rd2 <- function(...) {
       wax <- rd(...)
-      way <- data.frame(dplyr::filter(ax, !is.na(nameid)))
+      way <- data.frame(dplyr::filter(wax, !is.na(nameid)))
       return(way)
     }
   } else {
