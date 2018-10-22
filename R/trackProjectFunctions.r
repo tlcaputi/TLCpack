@@ -405,18 +405,15 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F,
       if ("nameid" %in% names(ax)){
         sample_nameids <- sample(tlcPack::na_omit(ax$nameid), test_n)
         print(sample_nameids[1:20])
-        ay <- ax[ax$nameid %in% sample_nameids,]
+        ay <- ax[ax$nameid %in% sample_nameids,]; rm(ax)
       } else {
-        ay <- ax
+        ay <- dplyr::sample_n(ax, test_n); rm(ax)
       }
       return(ay)
       }
     } else {
       read <- function(...) rd2(...)
     }
-
-
-  # feather_name <- paste0(in_fn,".feather")
 
   if (clean) {
     print("reading from csv or text, cleaning, and writing to feather")
