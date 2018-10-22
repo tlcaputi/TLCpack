@@ -282,12 +282,13 @@ wn <- function(x){
 
 
 cleanData <- function(x){
+  gc()
   tlcPack::print0("renaming columns")
   names(x) <- tolower(names(x))
   tlcPack::print0("to lower case")
   x <- apply(x,2,tolower)
   tlcPack::print0("to data frame")
-  x <- as.data.frame(x)
+  x <- as.data.frame(x); gc()
   tlcPack::print0("school name procedure")
   if ("school" %in% names(x)){
     for (q in c("hs", "high", "school", "academy", "the", "a",
@@ -311,26 +312,24 @@ cleanData <- function(x){
     tlcPack::print0("first names")
     x$firstname <- sapply(x$name, function(x) {
       fnFinder(x)
-    })
+    }); gc()
     tlcPack::print0("last names")
     x$lastname <- sapply(x$name, lnFinder)
     tlcPack::print0("uninames")
     x$uniname <- paste0(word(x$firstname, 1), " ", word(x$lastname, 1))
     tlcPack::print0("before hyp")
-    x$beforehyp <- sapply(x$name, function(x) tlcPack::hypFinder(x, before=T))
+    x$beforehyp <- sapply(x$name, function(x) tlcPack::hypFinder(x, before=T)); gc()
     tlcPack::print0("after hyp")
     x$afterhyp <- sapply(x$name, function(x) tlcPack::hypFinder(x, before=F))
 
     nmNum <- which(names(x) %in% c("name", "firstname","lastname","uniname"))
     tlcPack::print0("replacing hyps")
     x[,-nmNum] <- apply(x[,-nmNum], 2, function(h) gsub("-", " ", h))
-
   } else {
     x <- apply(x, 2, function(h) gsub("-", " ", h))
   }
-
   tlcPack::print0("removing punct")
-  x <- apply(x,2,function(h) removePunctuation(h))
+  x <- apply(x,2,function(h) removePunctuation(h)); gc()
   tlcPack::print0("stripping white space")
   x <- apply(x,2,function(h) stripWhitespace(h))
   tlcPack::print0("trimming white space")
@@ -338,7 +337,7 @@ cleanData <- function(x){
   tlcPack::print0("numbers only")
   x <- apply(x,2,function(h) suppressWarnings(ifelse(numbers_only(h), as.numeric(as.character(h)), h)))
   tlcPack::print0("fixing years")
-  x <- tlcPack::yrFun(x)
+  x <- tlcPack::yrFun(x); gc()
   tlcPack::print0("done")
   return(as.data.frame(x))
 }
@@ -426,7 +425,7 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F,
     } else {
       f <- read(paste0(in_fn, ".csv"), header=T, stringsAsFactor=F)
     }
-    f <- tlcPack::cleanData(f)
+    f <- tlcPack::cleanData(f); gc()
     write_feather(f, paste0(out_fn, ".feather"))
   } else {
 
@@ -443,5 +442,6 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F,
         write_feather(f, paste0(out_fn, ".feather"))
     }
   }
+  gc()
   return(f)
 }
