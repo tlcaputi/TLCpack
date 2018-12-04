@@ -295,7 +295,7 @@ cleanData <- function(x){
      "highschool", "senior", "sr", "schl")){
       pat <- paste0("\\<", q, "\\>")
       tlcPack::print0(paste0("removing ", pat))
-      x$unischool<- gsub(pat, "", x$school)
+      x$unischool <- gsub(pat, "", x$school)
     }
   }
 
@@ -441,4 +441,298 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F,
   }
   gc()
   return(f)
+}
+
+
+#' Unique
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+u <- function(...) unique(c(...))
+
+
+#' Is NA or NULL?
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+is.na0 <- function(x) I(is.na(x) | x=="NA" | is.null(x) | x=="NULL")
+
+
+#' As numeric, then as character
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+acan <- function(x) as.character(as.numeric(x))
+
+
+#' Is ID
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+
+isid <- function(x) length(x)==length(u(x))
+
+
+#' Sort by number of characters
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+sort_nchar <- function(cf, desc=F) {
+  if(desc) {
+    cf[order(-nchar(cf), cf)]
+  } else {
+    cf[order(nchar(cf), cf)]
+  }
+}
+
+
+#' Remove articles from text
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+remove_articles <- function(q){
+  q <- gsub("\\<and\\>|\\<of\\>|\\<for\\>|\\<in\\>|\\<the\\>", " ", q)
+  q <- gsub("  ","",q)
+  q <- gsub("^ ","",q)
+  q <- gsub(" $","",q)
+  return(q)
+}
+
+
+#' Take abbreviation
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+
+abb <- function(q, suffix="", prefix="", rm_articles=F) {
+  q <- gsub("-", " ", q)
+  if(rm_articles) as.vector(sapply(q, remove_articles))
+  sa <- sapply(unlist(str_split(q, " ")), function(x){
+    if(letters_only(x)) {
+      return(substr(x, 0, 1))
+    } else {
+      return(x)
+    }
+  }
+  )
+  ax <- paste0(as.vector(sa), collapse="")
+  if(nchar(ax) + nchar(prefix) + nchar(suffix) > 1){
+    return(paste0(prefix, ax, suffix))
+  }
+  else {
+    return(q)
+  }
+}
+
+#' grepl for all words
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+grepl_allWords <- function(pattern, string){
+  ax <- c()
+  words <- unlist(stringr::str_split(trimws(pattern)," "))
+  for (i in words){
+    ax <- c(ax, grepl(i, string))
+  }
+  return(all(ax))
+}
+
+#' Basic clean -- specific for track project
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+basicClean <- function(x){
+  # x <- as.vector(sapply(x, function(q) gsub("-", " ", q)))
+  # x <- as.vector(sapply(x, removePunctuation))
+  x <- as.vector(
+    sapply(x, function(q){
+      if(grepl("\\<[a-z]{1,3}-\\d{1,3}\\>", q)) {
+        return(gsub("-","",q))
+      } else {
+        return(gsub("-"," ",q))
+      }
+    })
+  )
+
+  x <- as.vector(sapply(x, function(q) gsub("\\<ath\\>", "athletic", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<university interscholastic league\\>", "uil", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<ath\\.", "athletic", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<gold cost\\.", "gold coast", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<gold coast league\\.", "gold coast league finals", q)))
+  x <- as.vector(sapply(x, trimws))
+  x <- as.vector(sapply(x, function(q) gsub("[[:punct:]]", " ", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<championship trails\\>", "championship trials", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<valle\\>", "valley", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<div\\>", "division", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<i\\>", "1", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<ii\\>", "2", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<iii\\>", "3", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<iv\\>", "4", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<v\\>", "5", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<vi\\>", "6", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<vii\\>", "7", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<viii\\>", "8", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<so cal\\>", "south california", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<socal\\>", "south california", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<avo\\>", "avocado", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<dieggo\\>", "diego", q)))
+  return(x)
+}
+
+#' Bind data from all school-meets in CSV
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+bind_data <- function(regex="TX_", directory = "./data/ca_tx_meets"){
+  tex_leagues <- grep(regex, dir(directory, ".csv", full.names=T), value=T)
+  lis <- list()
+  for (i in 1:length(tex_leagues)){
+    fn <- paste0(tex_leagues[i])
+    y <- read.csv(fn, header=T, stringsAsFactors=F)
+    y$schoolid <- as.numeric(as.character(gsubfn::strapplyc(y$link, "SchoolID=([0-9]+)$")))
+    y <- sapply(y, tolower)
+    y <- data.frame(y)
+    y$region <- y$league
+    y$league <- y$subleague
+    lis[[i]] <- y
+  }
+  tx_leagues <- do.call(rbind.data.frame, lis)
+  return(tx_leagues)
+}
+
+
+#' Count the number of times the pattern appears
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+strcount <- function(x, pattern, split){
+unlist(lapply(
+    strsplit(x, split),
+       function(z) na.omit(length(grep(pattern, z)))
+   ))
+}
+
+
+#' Over 80 percent same
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+over.80.percent <- function(x) any(prop.table(table(x))>=0.8) | all(prop.table(table(x))==0)
+
+
+#' More than 1 league
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+more.than.1.league <- function(x) length(table)>1
+
+
+#' More than two different leagues
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+more.than.two.diff.league <- function(x)  sum(sort(table(x))[-length(table(x))])>2
+
+
+#' Most common league
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+most.common.league <- function(x) names(sort(table(x)))[length(table(x))]
+
+
+#' Advanced grepl
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+
+grepl0 <- function(pattern, string){
+  pat <- unique(c(unlist(strsplit(pattern, split="&")),unlist(strsplit(pattern,split="(?:.+)"))))
+  txt <- paste0("grepl('",pat,"', get(string))", collapse="&")
+  ret <- eval(parse(text=txt))
+  return(ret)
+}
+
+#' Track abbreviations
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+
+track_abb <- function(lgs){
+  return(
+        c(
+          lgs,
+         as.vector(sapply(lgs[numWords(lgs)>1], function(x) abb(x))),
+         as.vector(sapply(lgs[numWords(lgs)>1], function(x) abb(x, "ac"))),
+         as.vector(sapply(lgs[numWords(lgs)>1], function(x) abb(x, "c"))),
+         as.vector(sapply(lgs[numWords(lgs)>1], function(x) abb(x, "al"))),
+         as.vector(sapply(lgs[numWords(lgs)>1], function(x) abb(x, "l")))
+       )
+       )
+}
+
+#' Extract abbreviations from parentheses
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+
+abbv <- function(lgs) {
+  paren_lgs <- grep("[(]", lgs)
+  lgs <- track_abb(lgs)
+  lgs <- removePunctuation(trimws(c(lgs[!1:length(lgs) %in% paren_lgs], unlist(str_split(lgs[paren_lgs], "[(]")))))
+  return(lgs)
 }
