@@ -440,6 +440,7 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F,
     }
   }
   gc()
+  names(f) <- gsub("<ef>..", "", names(f))
   return(f)
 }
 
