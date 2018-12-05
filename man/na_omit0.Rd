@@ -4,7 +4,7 @@
 \alias{na_omit0}
 \title{Advanced NA omit}
 \usage{
-na_omit0(x)
+na_omit0(x, remove_blanks = T)
 }
 \description{
 Advanced NA omit

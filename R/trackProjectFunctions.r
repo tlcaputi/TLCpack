@@ -773,4 +773,10 @@ tx_league_abbv <- function(x){
 #' @export
 #' @examples
 
-na_omit0 <- function(x) x[-which(is.na(x)|is.null(x)|x=="NA"|x=="NULL")]
+na_omit0 <- function(x, remove_blanks=T) {
+  if(remove_blanks) {
+    return(x[-which(is.na(x)|is.null(x)|x=="NA"|x=="NULL"|x=="")])
+  } else {
+    return(x[-which(is.na(x)|is.null(x)|x=="NA"|x=="NULL")])
+  }
+}
