@@ -18,7 +18,12 @@ na_omit <- function(x) x[!is.na(x)]
 #' @examples
 
 
-read_feather0 <- function(data, ...) as.data.frame(read_feather(data, ...))
+read_feather0 <- function(data, ...) {
+  tmp <- as.data.frame(read_feather(data, ...))
+  names(tmp) <- gsub("<ef>..", "", names(tmp))
+  return(tmp)
+}
+
 
 #' Does string contain letters only?
 #'
@@ -556,8 +561,15 @@ abb <- function(q, suffix="", prefix="", rm_articles=F) {
 grepl_allWords <- function(pattern, string){
   ax <- c()
   words <- unlist(stringr::str_split(trimws(pattern)," "))
-  for (i in words){
-    ax <- c(ax, grepl(i, string))
+  if (any(table(words)>1)){
+    more_than_1 <- names(table(words))[which(table(words)>1)]
+  }
+  for (i in unique(words)){
+    if (i %in% more_than_1){
+      ax <- c(ax, strcount(string, pattern, split=" ") == table(words)[which(names(table(words)) == i)])
+    } else {
+      ax <- c(ax, grepl(i, string))
+    }
   }
   return(all(ax))
 }
@@ -736,4 +748,20 @@ abbv <- function(lgs) {
   lgs <- track_abb(lgs)
   lgs <- removePunctuation(trimws(c(lgs[!1:length(lgs) %in% paren_lgs], unlist(str_split(lgs[paren_lgs], "[(]")))))
   return(lgs)
+}
+
+#' Texas T&F league abbreviations
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+tx_league_abbv <- function(x){
+  x <- gsub("university interscholastic league", "uil", x)
+  x <- gsub("southwest preparatory conference", "spc", x)
+  x <- gsub("texas association of private and parochial schools", "tapps", x)
+  x <- gsub("texas christian athletic fellowships", "tcaf", x)
+  x <- gsub("texas association of independent athletic organization", "taiao", x)
+  x <- gsub("texas christian athletic league", "tcal", x)
 }
