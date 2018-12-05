@@ -765,3 +765,12 @@ tx_league_abbv <- function(x){
   x <- gsub("texas association of independent athletic organization", "taiao", x)
   x <- gsub("texas christian athletic league", "tcal", x)
 }
+
+#' Advanced NA omit
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+na_omit0 <- function(x) x[-which(is.na(x)|is.null(x)|x=="NA"|x=="NULL")]
