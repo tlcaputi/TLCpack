@@ -566,7 +566,7 @@ grepl_allWords <- function(pattern, string){
   }
   for (i in unique(words)){
     if (i %in% more_than_1){
-      ax <- c(ax, strcount(string, pattern, split=" ") == table(words)[which(names(table(words)) == i)])
+      ax <- c(ax, strcount(string, i, split=" ") == as.numeric(table(words)[which(names(table(words)) == i)]))
     } else {
       ax <- c(ax, grepl(i, string))
     }
