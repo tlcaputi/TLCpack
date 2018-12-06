@@ -563,6 +563,8 @@ grepl_allWords <- function(pattern, string){
   words <- unlist(stringr::str_split(trimws(pattern)," "))
   if (any(table(words)>1)){
     more_than_1 <- names(table(words))[which(table(words)>1)]
+  } else {
+    more_than_1 <- c()
   }
   for (i in unique(words)){
     if (i %in% more_than_1){
@@ -593,6 +595,17 @@ basicClean <- function(x){
       }
     })
   )
+
+  x <- as.vector(sapply(x, function(q) gsub("\\<00\\>", "0", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<01\\>", "1", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<02\\>", "2", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<03\\>", "3", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<04\\>", "4", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<05\\>", "5", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<06\\>", "6", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<07\\>", "7", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<08\\>", "8", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<09\\>", "9", q)))
 
   x <- as.vector(sapply(x, function(q) gsub("\\<ath\\>", "athletic", q)))
   x <- as.vector(sapply(x, function(q) gsub("\\<university interscholastic league\\>", "uil", q)))
