@@ -4,7 +4,7 @@
 \alias{grepl_allWords}
 \title{grepl for all words}
 \usage{
-grepl_allWords(pattern, string)
+grepl_allWords(pattern, string, spaces = T)
 }
 \description{
 grepl for all words

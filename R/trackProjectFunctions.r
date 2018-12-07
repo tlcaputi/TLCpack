@@ -558,7 +558,8 @@ abb <- function(q, suffix="", prefix="", rm_articles=F) {
 #' @export
 #' @examples
 
-grepl_allWords <- function(pattern, string){
+grepl_allWords <- function(pattern, string, spaces=T){
+  if(spaces) string <- paste0("\\<",string,"\\>")
   ax <- c()
   words <- unlist(stringr::str_split(trimws(pattern)," "))
   if (any(table(words)>1)){
@@ -793,3 +794,12 @@ na_omit0 <- function(x, remove_blanks=T) {
     return(x[-which(is.na(x)|is.null(x)|x=="NA"|x=="NULL")])
   }
 }
+
+#' Navigate to meet in Athletic.net using meetID
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+meet <- function(meetid) browseURL(gsub("MEETID",meetid,"https://www.athletic.net/TrackAndField/meet/MEETID/results"))
