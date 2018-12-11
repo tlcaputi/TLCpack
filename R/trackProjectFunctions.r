@@ -584,7 +584,32 @@ grepl_allWords <- function(pattern, string, spaces=T){
 #' @export
 #' @examples
 
+
 basicClean <- function(x){
+
+  x <- as.vector(sapply(x, function(q), gsub("\\<[0-9]+/[0-9]+\\>", "", q)))
+  x <- as.vector(sapply(x, function(q), gsub("\\<[0-9]+-[0-9]+\\>", "", q)))
+  x <- as.vector(sapply(x, function(q), gsub("\\<([0-9]+/[0-9]+)\\>", "", q)))
+  x <- as.vector(sapply(x, function(q), gsub("\\<([0-9]+-[0-9]+)\\>", "", q)))
+
+
+  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*th-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*wed-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*fri-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*mon-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*tue-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*sat-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*sun-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*t-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*th-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*f-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*m-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*w-*)*\\>", "", q)))
+
+  x <- as.vector(sapply(x, function(q), gsub("\\<([[:punct:]])\\>", "", q)))
+  x <- as.vector(sapply(x, function(q), gsub("\\<[[:punct:]]\\>", "", q)))
+
+
   # x <- as.vector(sapply(x, function(q) gsub("-", " ", q)))
   # x <- as.vector(sapply(x, removePunctuation))
   x <- as.vector(
@@ -803,3 +828,13 @@ na_omit0 <- function(x, remove_blanks=T) {
 #' @examples
 
 meet <- function(meetid) browseURL(gsub("MEETID",meetid,"https://www.athletic.net/TrackAndField/meet/MEETID/results"))
+
+
+#' Make sapply into a vector
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+
+avsapply <- function(...) as.vector(sapply(...))
