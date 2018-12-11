@@ -570,7 +570,7 @@ grepl_allWords <- function(pattern, string, spaces=T, spaces_for_pattern=T){
   for (i in unique(words)){
 
     if(spaces_for_pattern) i <- paste0("\\<",i,"\\>")
-    
+
     if (i %in% more_than_1){
       ax <- c(ax, strcount(string, i, split=" ") == as.numeric(table(words)[which(names(table(words)) == i)]))
     } else {
@@ -590,24 +590,24 @@ grepl_allWords <- function(pattern, string, spaces=T, spaces_for_pattern=T){
 
 basicClean <- function(x){
 
-  x <- as.vector(sapply(x, function(q), gsub("\\<[0-9]+/[0-9]+\\>", "", q)))
-  x <- as.vector(sapply(x, function(q), gsub("\\<[0-9]+-[0-9]+\\>", "", q)))
-  x <- as.vector(sapply(x, function(q), gsub("\\<([0-9]+/[0-9]+)\\>", "", q)))
-  x <- as.vector(sapply(x, function(q), gsub("\\<([0-9]+-[0-9]+)\\>", "", q)))
-  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*th-*)*\\>", "", q)))
-  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*wed-*)*\\>", "", q)))
-  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*fri-*)*\\>", "", q)))
-  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*mon-*)*\\>", "", q)))
-  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*tue-*)*\\>", "", q)))
-  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*sat-*)*\\>", "", q)))
-  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*sun-*)*\\>", "", q)))
-  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*t-*)*\\>", "", q)))
-  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*th-*)*\\>", "", q)))
-  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*f-*)*\\>", "", q)))
-  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*m-*)*\\>", "", q)))
-  x <- as.vector(sapply(x, function(q), gsub("\\<(*-*w-*)*\\>", "", q)))
-  x <- as.vector(sapply(x, function(q), gsub("\\<([[:punct:]])\\>", "", q)))
-  x <- as.vector(sapply(x, function(q), gsub("\\<[[:punct:]]\\>", "", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<[0-9]+/[0-9]+\\>", "", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<[0-9]+-[0-9]+\\>", "", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<([0-9]+/[0-9]+)\\>", "", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<([0-9]+-[0-9]+)\\>", "", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<(*-*th-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<(*-*wed-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<(*-*fri-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<(*-*mon-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<(*-*tue-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<(*-*sat-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<(*-*sun-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<(*-*t-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<(*-*th-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<(*-*f-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<(*-*m-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<(*-*w-*)*\\>", "", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<([[:punct:]])\\>", "", q)))
+  x <- as.vector(sapply(x, function(q) gsub("\\<[[:punct:]]\\>", "", q)))
 
 
   # x <- as.vector(sapply(x, function(q) gsub("-", " ", q)))
