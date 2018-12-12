@@ -2,12 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{na_omit}
 \alias{na_omit}
-\title{NA remover
-This is some explanation text.}
+\title{This function removes all NAs from a vector.}
 \usage{
 na_omit(x)
 }
 \description{
-NA remover
-This is some explanation text.
+This function removes all NAs from a vector.
 }

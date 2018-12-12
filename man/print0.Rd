@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{print0}
 \alias{print0}
-\title{Custom print with systime}
+\title{Custom print with systime -- prints whatever you'd like, but with the systime.}
 \usage{
 print0(x)
 }
 \description{
-Custom print with systime
+Custom print with systime -- prints whatever you'd like, but with the systime.
 }

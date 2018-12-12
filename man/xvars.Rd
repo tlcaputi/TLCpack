@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{xvars}
 \alias{xvars}
-\title{Select variables of a dataset if they exist}
+\title{Select variables of a dataset if they exist. Basically, this is to avoid errors for "variable doesn't exist in the dataset".}
 \usage{
 xvars(data, variables)
 }
 \description{
-Select variables of a dataset if they exist
+Select variables of a dataset if they exist. Basically, this is to avoid errors for "variable doesn't exist in the dataset".
 }

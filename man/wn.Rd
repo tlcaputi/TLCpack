@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{wn}
 \alias{wn}
-\title{Take only numbers before the decimal}
+\title{Take only numbers before the decimal. "43890.478943" turns to "43890348"}
 \usage{
 wn(x)
 }
 \description{
-Take only numbers before the decimal
+Take only numbers before the decimal. "43890.478943" turns to "43890348"
 }

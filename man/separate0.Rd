@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{separate0}
 \alias{separate0}
-\title{Separate a single column into many columns by a delimiter}
+\title{Separate a single column into many columns by a delimiter. If a value for a column is "cat dog giraffe" and sep=" ", we get three columns "cat", "dog", and "giraffe".}
 \usage{
 separate0(data, col_to_split, sep)
 }
 \description{
-Separate a single column into many columns by a delimiter
+Separate a single column into many columns by a delimiter. If a value for a column is "cat dog giraffe" and sep=" ", we get three columns "cat", "dog", and "giraffe".
 }

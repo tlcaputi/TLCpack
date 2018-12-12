@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{yrFun}
 \alias{yrFun}
-\title{Fix years}
+\title{Fix years: Some years are pretty obviously incorrect. If the year is between 50-100, we add 1900. If it is between 0-50, we add 2000. Otherwise, we keep it the same.}
 \usage{
 yrFun(dat)
 }
 \description{
-Fix years
+Fix years: Some years are pretty obviously incorrect. If the year is between 50-100, we add 1900. If it is between 0-50, we add 2000. Otherwise, we keep it the same.
 }

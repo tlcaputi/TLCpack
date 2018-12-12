@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{unique00}
 \alias{unique00}
-\title{Unique with na.omit and as.numeric option}
+\title{Unique with na.omit and as.numeric option. This is just an advanced unique with a few extra options.}
 \usage{
 unique00(x, an = T)
 }
 \description{
-Unique with na.omit and as.numeric option
+Unique with na.omit and as.numeric option. This is just an advanced unique with a few extra options.
 }

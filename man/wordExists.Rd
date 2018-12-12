@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{wordExists}
 \alias{wordExists}
-\title{Is this pattern in the string (Logical)}
+\title{Is this pattern in the string (Logical) - just like grepl}
 \usage{
 wordExists(pattern, string)
 }
 \description{
-Is this pattern in the string (Logical)
+Is this pattern in the string (Logical) - just like grepl
 }

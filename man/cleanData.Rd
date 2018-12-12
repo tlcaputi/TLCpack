@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{cleanData}
 \alias{cleanData}
-\title{Comprehensively clean/standardize data}
+\title{Comprehensively clean/standardize data -- run the function to get details in comments}
 \usage{
 cleanData(x)
 }
 \description{
-Comprehensively clean/standardize data
+Comprehensively clean/standardize data -- run the function to get details in comments
 }

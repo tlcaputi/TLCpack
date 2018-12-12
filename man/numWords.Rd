@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{numWords}
 \alias{numWords}
-\title{How many words in this string?}
+\title{How many words in this string? (Based upon a split of " ")}
 \usage{
-numWords(str1)
+numWords(str1, split = " ")
 }
 \description{
-How many words in this string?
+How many words in this string? (Based upon a split of " ")
 }

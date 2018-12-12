@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{read_feather0}
 \alias{read_feather0}
-\title{Custom Read Feather}
+\title{This is a wrapper for the read_feather function. It returns a data.frame and fixes the first name, which often has an extra character/}
 \usage{
 read_feather0(data, ...)
 }
 \description{
-Custom Read Feather
+This is a wrapper for the read_feather function. It returns a data.frame and fixes the first name, which often has an extra character/
 }

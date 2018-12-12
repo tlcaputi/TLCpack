@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{letters_only}
 \alias{letters_only}
-\title{Does string contain letters only?}
+\title{Does string contain letters only? If so, it returns TRUE. Otherwise, FALSE.}
 \usage{
 letters_only(x)
 }
 \description{
-Does string contain letters only?
+Does string contain letters only? If so, it returns TRUE. Otherwise, FALSE.
 }

@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{numbers_only}
 \alias{numbers_only}
-\title{Does string contain numbers only?}
+\title{Does string contain numbers only? If so, it returns TRUE. Otherwise, FALSE.}
 \usage{
 numbers_only(x)
 }
 \description{
-Does string contain numbers only?
+Does string contain numbers only? If so, it returns TRUE. Otherwise, FALSE.
 }

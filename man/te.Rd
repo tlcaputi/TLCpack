@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{te}
 \alias{te}
-\title{Is this text in this data?}
+\title{Text exists: Is this text in this vector? For example, is "A" in LETTERS?}
 \usage{
 te(data, text)
 }
 \description{
-Is this text in this data?
+Text exists: Is this text in this vector? For example, is "A" in LETTERS?
 }
