@@ -1,5 +1,5 @@
-#' NA remover
-#' This is some explanation text.
+#' This function removes all NAs from a vector.
+#'
 #' @param
 #' @keywords
 #' @export
@@ -10,7 +10,7 @@ na_omit <- function(x) x[!is.na(x)]
 
 
 
-#' Custom Read Feather
+#' This is a wrapper for the read_feather function. It returns a data.frame and fixes the first name, which often has an extra character/
 #'
 #' @param
 #' @keywords
@@ -25,7 +25,7 @@ read_feather0 <- function(data, ...) {
 }
 
 
-#' Does string contain letters only?
+#' Does string contain letters only? If so, it returns TRUE. Otherwise, FALSE.
 #'
 #' @param
 #' @keywords
@@ -35,7 +35,7 @@ read_feather0 <- function(data, ...) {
 letters_only <- function(x) !grepl("[^A-Za-z]", x)
 
 
-#' Does string contain numbers only?
+#' Does string contain numbers only? If so, it returns TRUE. Otherwise, FALSE.
 #'
 #' @param
 #' @keywords
@@ -47,7 +47,7 @@ letters_only <- function(x) !grepl("[^A-Za-z]", x)
 numbers_only <- function(x) !grepl("\\D", x)
 
 
-#' How many words in this string?
+#' How many words in this string? (Based upon a split of " ")
 #'
 #' @param
 #' @keywords
@@ -55,11 +55,11 @@ numbers_only <- function(x) !grepl("\\D", x)
 #' @examples
 
 
-numWords <- function(str1) sapply(strsplit(str1, " "), length)
+numWords <- function(str1, split=" ") sapply(strsplit(str1, split), length)
 
 
 
-#' Is this text in this data?
+#' Text exists: Is this text in this vector? For example, is "A" in LETTERS?
 #'
 #' @param
 #' @keywords
@@ -71,7 +71,7 @@ te <- function(data, text) text %in% data
 
 
 
-#' Custom print with systime
+#' Custom print with systime -- prints whatever you'd like, but with the systime.
 #'
 #' @param
 #' @keywords
@@ -82,7 +82,7 @@ te <- function(data, text) text %in% data
 print0 <- function(x) print(paste0(Sys.time(),"-- ",x))
 
 
-#' Is this pattern in the string (Logical)
+#' Is this pattern in the string (Logical) - just like grepl
 #'
 #' @param
 #' @keywords
@@ -96,15 +96,12 @@ wordExists <- function(pattern, string){
 }
 
 
-#' Find the first name
+#' Find the first name. Split up all the words by spaces. If there is a comma, it takes the first word after the comma (Last, First). Otherwise, it takes the first name.
 #'
 #' @param
 #' @keywords
 #' @export
 #' @examples
-
-
-
 
 fnFinder <- function(x){
   if(tlcPack::wordExists(",",x)){
@@ -122,7 +119,7 @@ fnFinder <- function(x){
 
 
 
-#' Find the last name
+#' Find the last name. Split up all words by spaces. If there is a comma, it takes the first word (Last, First). Otherwise, it takes the last name.
 #'
 #' @param
 #' @keywords
@@ -141,7 +138,7 @@ lnFinder <- function(x){
 }
 
 
-#' Find the hyphen
+#' Find the hyphen. Look for a hyphenated name. If a hyphenated name exists (e.g., Smith-Jones), it can return the word before the hyphen (if before=T, Smith) or after (if before=F, Jones).
 #'
 #' @param
 #' @keywords
@@ -171,7 +168,7 @@ hypFinder <- function(x, before=T){
 
 
 
-#' Select variables of a dataset if they exist
+#' Select variables of a dataset if they exist. Basically, this is to avoid errors for "variable doesn't exist in the dataset".
 #'
 #' @param
 #' @keywords
@@ -186,14 +183,12 @@ xvars <- function(data, variables) {
 
 
 
-#' Fix years
+#' Fix years: Some years are pretty obviously incorrect. If the year is between 50-100, we add 1900. If it is between 0-50, we add 2000. Otherwise, we keep it the same.
 #'
 #' @param
 #' @keywords
 #' @export
 #' @examples
-
-
 
 
 yrFun <- function(dat){
@@ -208,15 +203,12 @@ yrFun <- function(dat){
 
 
 
-#' Unique with na.omit and as.numeric option
+#' Unique with na.omit and as.numeric option. This is just an advanced unique with a few extra options.
 #'
 #' @param
 #' @keywords
 #' @export
 #' @examples
-
-
-
 
 unique00 <- function(x, an=T){
   if(an) {
@@ -230,15 +222,12 @@ unique00 <- function(x, an=T){
 }
 
 
-#' Separate a single column into many columns by a delimiter
+#' Separate a single column into many columns by a delimiter. If a value for a column is "cat dog giraffe" and sep=" ", we get three columns "cat", "dog", and "giraffe".
 #'
 #' @param
 #' @keywords
 #' @export
 #' @examples
-
-
-
 
 separate0 <- function(data, col_to_split, sep){
   num_names = max(str_count(data[,col_to_split], sep), na.rm=T) + 1
@@ -249,7 +238,7 @@ separate0 <- function(data, col_to_split, sep){
 
 
 
-#' Read pipe-delimited file
+#' Read pipe-delimited file: This just sets some defaults for reading in pipe delimited rather than comma files.
 #'
 #' @param
 #' @keywords
@@ -262,7 +251,7 @@ read.pipe <- function(filename, ...) read.delim(filename, sep="|", header=T, quo
 
 
 
-#' Take only numbers before the decimal
+#' Take only numbers before the decimal. "43890.478943" turns to "43890348"
 #'
 #' @param
 #' @keywords
@@ -278,7 +267,7 @@ wn <- function(x){
 
 
 
-#' Comprehensively clean/standardize data
+#' Comprehensively clean/standardize data -- run the function to get details in comments
 #'
 #' @param
 #' @keywords
@@ -286,16 +275,18 @@ wn <- function(x){
 #' @examples
 
 
-cleanData <- function(x){
-  gc()
+cleanData <- function(x){ ## the input is a dataset
+  gc() ## first we do garbage collection, which is just to save memory
   tlcPack::print0("renaming columns")
-  names(x) <- tolower(names(x))
+  names(x) <- tolower(names(x)) ## we transfer all the names of the dataset to lower case
   tlcPack::print0("to lower case")
-  x <- apply(x,2,tolower)
+  x <- apply(x,2,tolower) ## now we make everything in the dataset lower case
   tlcPack::print0("to data frame")
-  x <- as.data.frame(x); gc()
+  x <- as.data.frame(x); gc() ## we make it into a dataframe
   tlcPack::print0("school name procedure")
-  if ("school" %in% names(x)){
+  if ("school" %in% names(x)){ ## if "school" is one of the variables
+
+    ## 
     for (q in c("hs", "high", "school", "academy", "the", "a",
      "highschool", "senior", "sr", "schl")){
       pat <- paste0("\\<", q, "\\>")
