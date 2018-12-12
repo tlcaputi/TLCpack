@@ -1,5 +1,5 @@
 #' NA remover
-#'
+#' This is some explanation text.
 #' @param
 #' @keywords
 #' @export
@@ -515,7 +515,8 @@ sort_nchar <- function(cf, desc=F) {
 #' @examples
 
 remove_articles <- function(q){
-  q <- gsub("\\<and\\>|\\<of\\>|\\<for\\>|\\<in\\>|\\<the\\>", " ", q)
+  q <- gsub("\\<and\\>|\\<of\\>|\\<for\\>|\\<in\\>|\\<the\\>", "", q)
+  q <- trimws(q)
   q <- gsub("  ","",q)
   q <- gsub("^ ","",q)
   q <- gsub(" $","",q)

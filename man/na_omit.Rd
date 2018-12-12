@@ -2,10 +2,12 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{na_omit}
 \alias{na_omit}
-\title{NA remover}
+\title{NA remover
+This is some explanation text.}
 \usage{
 na_omit(x)
 }
 \description{
 NA remover
+This is some explanation text.
 }
