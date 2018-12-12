@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{is.na0}
 \alias{is.na0}
-\title{Is NA or NULL?}
+\title{Is NA or NULL? If so, TRUE. Otherwise, FALSE. Helpful because it looks for strings "NA" and "NULL".}
 \usage{
 is.na0(x)
 }
 \description{
-Is NA or NULL?
+Is NA or NULL? If so, TRUE. Otherwise, FALSE. Helpful because it looks for strings "NA" and "NULL".
 }

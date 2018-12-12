@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{remove_articles}
 \alias{remove_articles}
-\title{Remove articles from text}
+\title{Remove articles and other small words (and/of/for/in/the) from text -- helps with abbreviations}
 \usage{
 remove_articles(q)
 }
 \description{
-Remove articles from text
+Remove articles and other small words (and/of/for/in/the) from text -- helps with abbreviations
 }

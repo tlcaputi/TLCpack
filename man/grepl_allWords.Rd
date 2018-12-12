@@ -2,10 +2,14 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{grepl_allWords}
 \alias{grepl_allWords}
-\title{grepl for all words}
+\title{grepl for all words -- one function to look for all words in a pattern string in any order.}
 \usage{
 grepl_allWords(pattern, string, spaces = T, spaces_for_pattern = T)
 }
 \description{
-grepl for all words
+grepl for all words -- one function to look for all words in a pattern string in any order.
+}
+\examples{
+grepl_allWords("cats dogs giraffes", "dogs giraffes lions tigers cats") == T
+grepl_allWords("cats dogs giraffes", "dogs giraffes lions tigers") == F
 }

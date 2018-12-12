@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{load_packages}
 \alias{load_packages}
-\title{Load Packages}
+\title{Load Packages -- this just makes it easy to load all the packages I normally use for the track project}
 \usage{
 load_packages()
 }
 \description{
-Load Packages
+Load Packages -- this just makes it easy to load all the packages I normally use for the track project
 }

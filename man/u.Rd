@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{u}
 \alias{u}
-\title{Unique}
+\title{Unique -- exactly unique(), just shorter}
 \usage{
 u(...)
 }
 \description{
-Unique
+Unique -- exactly unique(), just shorter
 }

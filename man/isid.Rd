@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{isid}
 \alias{isid}
-\title{Is ID}
+\title{Is ID? Equivalent to Stata function isid()}
 \usage{
 isid(x)
 }
 \description{
-Is ID
+Is ID? Equivalent to Stata function isid()
 }

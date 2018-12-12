@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{sort_nchar}
 \alias{sort_nchar}
-\title{Sort by number of characters}
+\title{Sort a vector of strings by number of characters}
 \usage{
 sort_nchar(cf, desc = F)
 }
 \description{
-Sort by number of characters
+Sort a vector of strings by number of characters
 }

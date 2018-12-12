@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{select0}
 \alias{select0}
-\title{select0}
+\title{select0 -- this is a wrapper for dplyr::select that returns a data frame instead of a tibble.}
 \usage{
 select0(x)
 }
 \description{
-select0
+select0 -- this is a wrapper for dplyr::select that returns a data frame instead of a tibble.
 }

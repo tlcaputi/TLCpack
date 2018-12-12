@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{abb}
 \alias{abb}
-\title{Take abbreviation}
+\title{Take abbreviation -- translates a string into its abbreviation}
 \usage{
 abb(q, suffix = "", prefix = "", rm_articles = F)
 }
 \description{
-Take abbreviation
+Take abbreviation -- translates a string into its abbreviation
 }

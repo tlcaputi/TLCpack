@@ -286,61 +286,83 @@ cleanData <- function(x){ ## the input is a dataset
   tlcPack::print0("school name procedure")
   if ("school" %in% names(x)){ ## if "school" is one of the variables
 
-    ## 
+    ## there are a number of terms that we can clean
     for (q in c("hs", "high", "school", "academy", "the", "a",
      "highschool", "senior", "sr", "schl")){
+       ## it's important that we only look for these patterns when they are in their own word
       pat <- paste0("\\<", q, "\\>")
+      ## we remove the term
       tlcPack::print0(paste0("removing ", pat))
+      ## we name the new variable unischool -- which stands for uniform school. This basically means
+      ## that we have standardized the name.
       x$unischool <- gsub(pat, "", x$school)
     }
   }
 
   tlcPack::print0("name procedure")
+  ## if "name" is one of the variables in the dataframe
   if ("name" %in% names(x)){
     nmNum <- which(names(x)=="name")[1]
+    ## first we get rid of some extra terms
     for (q in c("sr.", "sr", "senior", "jr.","jr","junior","mr.", "mrs.","ms.","miss",
                 "iii","ii","iv","v","vi","mr","mrs","ms")) {
                   pat <- paste0("\\<", q, "\\>")
                   tlcPack::print0(paste0("removing ", pat))
                   x$name <- gsub(pat, "", x$name)
                 }
-
+    ## then we find the first name
     tlcPack::print0("first names")
     x$firstname <- sapply(x$name, function(x) {
       fnFinder(x)
     }); gc()
+    ## and the last name
     tlcPack::print0("last names")
     x$lastname <- sapply(x$name, lnFinder)
+
+    ## we create "uninames" -- uniform names or standardized names by combining the first words of the first and last name
     tlcPack::print0("uninames")
     x$uniname <- paste0(word(x$firstname, 1), " ", word(x$lastname, 1))
+
+    ## what if there is a hyphen in the name? We create new variables for the name before
+    ## and after the hyphen
     tlcPack::print0("before hyp")
     x$beforehyp <- sapply(x$name, function(x) tlcPack::hypFinder(x, before=T)); gc()
     tlcPack::print0("after hyp")
     x$afterhyp <- sapply(x$name, function(x) tlcPack::hypFinder(x, before=F))
 
+
+    ## now that we've captured the hyphenated names, we get rid of the hyphens in the unique names
     nmNum <- which(names(x) %in% c("name", "firstname","lastname","uniname"))
     tlcPack::print0("replacing hyps")
     x[,-nmNum] <- apply(x[,-nmNum], 2, function(h) gsub("-", " ", h))
+
   } else {
     x <- apply(x, 2, function(h) gsub("-", " ", h))
   }
+
+  ## Now we do some more basic cleaning, including removing punctuation, removing the white space
   tlcPack::print0("removing punct")
   x <- apply(x,2,function(h) removePunctuation(h)); gc()
   tlcPack::print0("stripping white space")
   x <- apply(x,2,function(h) stripWhitespace(h))
   tlcPack::print0("trimming white space")
   x <- apply(x,2,function(h) trimws(h))
+  ## if something is made of numbers, we want it to be numeric
   tlcPack::print0("numbers only")
   x <- apply(x,2,function(h) suppressWarnings(ifelse(numbers_only(h), as.numeric(as.character(h)), h)))
+
+  ##fix years like "99" to "1999" and "04" to "2004"
   tlcPack::print0("fixing years")
   x <- tlcPack::yrFun(x); gc()
   tlcPack::print0("done")
+
+  ## return as a data frame.
   return(as.data.frame(x))
 }
 
 
 
-#' select0
+#' select0 -- this is a wrapper for dplyr::select that returns a data frame instead of a tibble.
 #'
 #' @param
 #' @keywords
@@ -351,7 +373,7 @@ select0 <- function(x) as.data.frame(dplyr::select())
 
 
 
-#' Load Packages
+#' Load Packages -- this just makes it easy to load all the packages I normally use for the track project
 #'
 #' @param
 #' @keywords
@@ -364,7 +386,9 @@ pacman::p_load(devtools, survey, MASS, netCoin, feather, tm,
 }
 
 
-#' CSV to Feather (if necessary)
+#' CSV to Feather (if necessary) -- this is an omnibus read-data-and-save function. We use feather data files rather than CSVs because feather files are lighter.
+#' This detects if a feather file already exists. If it doesn't
+#' it reads in CSV and saves a feather file. It can read normal CSV or pipe-delimited files. It returns the dataset, so you don't have to read it in again.
 #'
 #' @param
 #' @keywords
@@ -441,7 +465,7 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F,
 }
 
 
-#' Unique
+#' Unique -- exactly unique(), just shorter
 #'
 #' @param
 #' @keywords
@@ -451,7 +475,7 @@ c2f <- function(in_fn, out_fn=in_fn, clean=F, pipe=F, txt=F,
 u <- function(...) unique(c(...))
 
 
-#' Is NA or NULL?
+#' Is NA or NULL? If so, TRUE. Otherwise, FALSE. Helpful because it looks for strings "NA" and "NULL".
 #'
 #' @param
 #' @keywords
@@ -471,7 +495,7 @@ is.na0 <- function(x) I(is.na(x) | x=="NA" | is.null(x) | x=="NULL")
 acan <- function(x) as.character(as.numeric(x))
 
 
-#' Is ID
+#' Is ID? Equivalent to Stata function isid()
 #'
 #' @param
 #' @keywords
@@ -482,7 +506,7 @@ acan <- function(x) as.character(as.numeric(x))
 isid <- function(x) length(x)==length(u(x))
 
 
-#' Sort by number of characters
+#' Sort a vector of strings by number of characters
 #'
 #' @param
 #' @keywords
@@ -498,7 +522,7 @@ sort_nchar <- function(cf, desc=F) {
 }
 
 
-#' Remove articles from text
+#' Remove articles and other small words (and/of/for/in/the) from text -- helps with abbreviations
 #'
 #' @param
 #' @keywords
@@ -506,7 +530,7 @@ sort_nchar <- function(cf, desc=F) {
 #' @examples
 
 remove_articles <- function(q){
-  q <- gsub("\\<and\\>|\\<of\\>|\\<for\\>|\\<in\\>|\\<the\\>", "", q)
+  q <- gsub("\\<and\\>|\\<of\\>|\\<for\\>|\\<in\\>|\\<the\\>", " ", q)
   q <- trimws(q)
   q <- gsub("  ","",q)
   q <- gsub("^ ","",q)
@@ -515,7 +539,7 @@ remove_articles <- function(q){
 }
 
 
-#' Take abbreviation
+#' Take abbreviation -- translates a string into its abbreviation
 #'
 #' @param
 #' @keywords
@@ -543,12 +567,13 @@ abb <- function(q, suffix="", prefix="", rm_articles=F) {
   }
 }
 
-#' grepl for all words
+#' grepl for all words -- one function to look for all words in a pattern string in any order.
 #'
 #' @param
 #' @keywords
 #' @export
-#' @examples
+#' @examples grepl_allWords("cats dogs giraffes", "dogs giraffes lions tigers cats") == T
+#' @examples grepl_allWords("cats dogs giraffes", "dogs giraffes lions tigers") == F
 
 grepl_allWords <- function(pattern, string, spaces=T, spaces_for_pattern=T){
   if(spaces) string <- paste0("\\<",string,"\\>")
@@ -582,10 +607,20 @@ grepl_allWords <- function(pattern, string, spaces=T, spaces_for_pattern=T){
 
 basicClean <- function(x){
 
+
+  ## A lot of meets include the dates of the meet in the meet name. This removes that.
+  ## Here are some examples of strings that would be removed:
+
+
+  ## 4/26
   x <- as.vector(sapply(x, function(q) gsub("\\<[0-9]+/[0-9]+\\>", "", q)))
+  ## 12-13
   x <- as.vector(sapply(x, function(q) gsub("\\<[0-9]+-[0-9]+\\>", "", q)))
+  ## (11/08)
   x <- as.vector(sapply(x, function(q) gsub("\\<([0-9]+/[0-9]+)\\>", "", q)))
+  ## (11-08)
   x <- as.vector(sapply(x, function(q) gsub("\\<([0-9]+-[0-9]+)\\>", "", q)))
+  ## (mon/tues/wed/th/fri/sat/sun/m/t/w/th/f)
   x <- as.vector(sapply(x, function(q) gsub("\\<(*-*th-*)*\\>", "", q)))
   x <- as.vector(sapply(x, function(q) gsub("\\<(*-*wed-*)*\\>", "", q)))
   x <- as.vector(sapply(x, function(q) gsub("\\<(*-*fri-*)*\\>", "", q)))
@@ -598,12 +633,14 @@ basicClean <- function(x){
   x <- as.vector(sapply(x, function(q) gsub("\\<(*-*f-*)*\\>", "", q)))
   x <- as.vector(sapply(x, function(q) gsub("\\<(*-*m-*)*\\>", "", q)))
   x <- as.vector(sapply(x, function(q) gsub("\\<(*-*w-*)*\\>", "", q)))
+
+  ## (-) which may be left over after removing the others
   x <- as.vector(sapply(x, function(q) gsub("\\<([[:punct:]])\\>", "", q)))
+  ## - which make be left over after removing others
   x <- as.vector(sapply(x, function(q) gsub("\\<[[:punct:]]\\>", "", q)))
 
 
-  # x <- as.vector(sapply(x, function(q) gsub("-", " ", q)))
-  # x <- as.vector(sapply(x, removePunctuation))
+  ## cat-123
   x <- as.vector(
     sapply(x, function(q){
       if(grepl("\\<[a-z]{1,3}-\\d{1,3}\\>", q)) {
@@ -614,6 +651,7 @@ basicClean <- function(x){
     })
   )
 
+  ## changes 0X to X for numbers
   x <- as.vector(sapply(x, function(q) gsub("\\<00\\>", "0", q)))
   x <- as.vector(sapply(x, function(q) gsub("\\<01\\>", "1", q)))
   x <- as.vector(sapply(x, function(q) gsub("\\<02\\>", "2", q)))
@@ -624,6 +662,7 @@ basicClean <- function(x){
   x <- as.vector(sapply(x, function(q) gsub("\\<07\\>", "7", q)))
   x <- as.vector(sapply(x, function(q) gsub("\\<08\\>", "8", q)))
   x <- as.vector(sapply(x, function(q) gsub("\\<09\\>", "9", q)))
+
 
   x <- as.vector(sapply(x, function(q) gsub("\\<ath\\>", "athletic", q)))
   x <- as.vector(sapply(x, function(q) gsub("\\<university interscholastic league\\>", "uil", q)))
@@ -650,7 +689,7 @@ basicClean <- function(x){
   return(x)
 }
 
-#' Bind data from all school-meets in CSV
+#' Bind data from all school-meets in CSV. This was necessary
 #'
 #' @param
 #' @keywords
