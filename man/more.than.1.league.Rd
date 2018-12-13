@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{more.than.1.league}
 \alias{more.than.1.league}
-\title{More than 1 league}
+\title{There is more than one unique value in the vector}
 \usage{
 more.than.1.league(x)
 }
 \description{
-More than 1 league
+There is more than one unique value in the vector
 }

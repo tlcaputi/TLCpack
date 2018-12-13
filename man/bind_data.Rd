@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{bind_data}
 \alias{bind_data}
-\title{Bind data from all school-meets in CSV. This was necessary}
+\title{Bind data from all school-meets in CSV. This was necessary to use Audrey's school-league data, but we don't use that data anymore.}
 \usage{
 bind_data(regex = "TX_", directory = "./data/ca_tx_meets")
 }
 \description{
-Bind data from all school-meets in CSV. This was necessary
+Bind data from all school-meets in CSV. This was necessary to use Audrey's school-league data, but we don't use that data anymore.
 }

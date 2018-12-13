@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{grepl0}
 \alias{grepl0}
-\title{Advanced grepl}
+\title{Advanced grepl -- this was an attempt to make grepl a bit more usable. It doesn't work well.}
 \usage{
 grepl0(pattern, string)
 }
 \description{
-Advanced grepl
+Advanced grepl -- this was an attempt to make grepl a bit more usable. It doesn't work well.
 }

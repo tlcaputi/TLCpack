@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{na_omit0}
 \alias{na_omit0}
-\title{Advanced NA omit}
+\title{Advanced NA omit -- removes "NA", "NULL" and, if remove_blanks=T, ""}
 \usage{
 na_omit0(x, remove_blanks = T)
 }
 \description{
-Advanced NA omit
+Advanced NA omit -- removes "NA", "NULL" and, if remove_blanks=T, ""
 }

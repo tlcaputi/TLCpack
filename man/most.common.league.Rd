@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{most.common.league}
 \alias{most.common.league}
-\title{Most common league}
+\title{Most common league -- the most common vector in a list}
 \usage{
 most.common.league(x)
 }
 \description{
-Most common league
+Most common league -- the most common vector in a list
 }

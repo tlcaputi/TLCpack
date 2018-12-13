@@ -2,10 +2,14 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{track_abb}
 \alias{track_abb}
-\title{Track abbreviations}
+\title{Track abbreviations -- this adds a few suffixes to league abbreviations: ac, c, al, and l
+This is because the league "Butte Valley" might be coded as "Butte Valley Athletic Conference",
+"Butte Valley Conference", "Butte Valley Atheltic League", or "Butte Valley League"}
 \usage{
 track_abb(lgs)
 }
 \description{
-Track abbreviations
+Track abbreviations -- this adds a few suffixes to league abbreviations: ac, c, al, and l
+This is because the league "Butte Valley" might be coded as "Butte Valley Athletic Conference",
+"Butte Valley Conference", "Butte Valley Atheltic League", or "Butte Valley League"
 }

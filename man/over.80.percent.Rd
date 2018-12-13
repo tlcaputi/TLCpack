@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{over.80.percent}
 \alias{over.80.percent}
-\title{Over 80 percent same}
+\title{Over 80 percent of the elements in a vector are the same}
 \usage{
 over.80.percent(x)
 }
 \description{
-Over 80 percent same
+Over 80 percent of the elements in a vector are the same
 }

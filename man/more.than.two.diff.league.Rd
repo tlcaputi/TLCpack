@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{more.than.two.diff.league}
 \alias{more.than.two.diff.league}
-\title{More than two different leagues}
+\title{There are more than two elements different from the most common element in a vector}
 \usage{
 more.than.two.diff.league(x)
 }
 \description{
-More than two different leagues
+There are more than two elements different from the most common element in a vector
 }

@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{basicClean}
 \alias{basicClean}
-\title{Basic clean -- specific for track project}
+\title{Basic clean -- specific for track project (see code)}
 \usage{
 basicClean(x)
 }
 \description{
-Basic clean -- specific for track project
+Basic clean -- specific for track project (see code)
 }

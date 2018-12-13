@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{tx_league_abbv}
 \alias{tx_league_abbv}
-\title{Texas T&F league abbreviations}
+\title{Texas T&F league abbreviations -- takes abbreviations of Texas leagues}
 \usage{
 tx_league_abbv(x)
 }
 \description{
-Texas T&F league abbreviations
+Texas T&F league abbreviations -- takes abbreviations of Texas leagues
 }

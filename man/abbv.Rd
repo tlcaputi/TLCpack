@@ -2,10 +2,10 @@
 % Please edit documentation in R/trackProjectFunctions.r
 \name{abbv}
 \alias{abbv}
-\title{Extract abbreviations from parentheses}
+\title{Extract abbreviations from parentheses in a string}
 \usage{
 abbv(lgs)
 }
 \description{
-Extract abbreviations from parentheses
+Extract abbreviations from parentheses in a string
 }

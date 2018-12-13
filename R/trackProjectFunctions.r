@@ -597,7 +597,7 @@ grepl_allWords <- function(pattern, string, spaces=T, spaces_for_pattern=T){
   return(all(ax))
 }
 
-#' Basic clean -- specific for track project
+#' Basic clean -- specific for track project (see code)
 #'
 #' @param
 #' @keywords
@@ -663,7 +663,7 @@ basicClean <- function(x){
   x <- as.vector(sapply(x, function(q) gsub("\\<08\\>", "8", q)))
   x <- as.vector(sapply(x, function(q) gsub("\\<09\\>", "9", q)))
 
-
+  ## makes a few substitutions to standardize names and/or correct spelling mistakes
   x <- as.vector(sapply(x, function(q) gsub("\\<ath\\>", "athletic", q)))
   x <- as.vector(sapply(x, function(q) gsub("\\<university interscholastic league\\>", "uil", q)))
   x <- as.vector(sapply(x, function(q) gsub("\\<ath\\.", "athletic", q)))
@@ -689,7 +689,7 @@ basicClean <- function(x){
   return(x)
 }
 
-#' Bind data from all school-meets in CSV. This was necessary
+#' Bind data from all school-meets in CSV. This was necessary to use Audrey's school-league data, but we don't use that data anymore.
 #'
 #' @param
 #' @keywords
@@ -729,7 +729,7 @@ unlist(lapply(
 }
 
 
-#' Over 80 percent same
+#' Over 80 percent of the elements in a vector are the same
 #'
 #' @param
 #' @keywords
@@ -739,7 +739,7 @@ unlist(lapply(
 over.80.percent <- function(x) any(prop.table(table(x))>=0.8) | all(prop.table(table(x))==0)
 
 
-#' More than 1 league
+#' There is more than one unique value in the vector
 #'
 #' @param
 #' @keywords
@@ -749,7 +749,7 @@ over.80.percent <- function(x) any(prop.table(table(x))>=0.8) | all(prop.table(t
 more.than.1.league <- function(x) length(table)>1
 
 
-#' More than two different leagues
+#' There are more than two elements different from the most common element in a vector
 #'
 #' @param
 #' @keywords
@@ -759,7 +759,7 @@ more.than.1.league <- function(x) length(table)>1
 more.than.two.diff.league <- function(x)  sum(sort(table(x))[-length(table(x))])>2
 
 
-#' Most common league
+#' Most common league -- the most common vector in a list
 #'
 #' @param
 #' @keywords
@@ -769,7 +769,7 @@ more.than.two.diff.league <- function(x)  sum(sort(table(x))[-length(table(x))])
 most.common.league <- function(x) names(sort(table(x)))[length(table(x))]
 
 
-#' Advanced grepl
+#' Advanced grepl -- this was an attempt to make grepl a bit more usable. It doesn't work well.
 #'
 #' @param
 #' @keywords
@@ -784,7 +784,10 @@ grepl0 <- function(pattern, string){
   return(ret)
 }
 
-#' Track abbreviations
+#' Track abbreviations -- this adds a few suffixes to league abbreviations: ac, c, al, and l
+#' This is because the league "Butte Valley" might be coded as "Butte Valley Athletic Conference",
+#' "Butte Valley Conference", "Butte Valley Atheltic League", or "Butte Valley League"
+#'
 #'
 #' @param
 #' @keywords
@@ -805,7 +808,7 @@ track_abb <- function(lgs){
        )
 }
 
-#' Extract abbreviations from parentheses
+#' Extract abbreviations from parentheses in a string
 #'
 #' @param
 #' @keywords
@@ -820,7 +823,7 @@ abbv <- function(lgs) {
   return(lgs)
 }
 
-#' Texas T&F league abbreviations
+#' Texas T&F league abbreviations -- takes abbreviations of Texas leagues
 #'
 #' @param
 #' @keywords
@@ -836,7 +839,7 @@ tx_league_abbv <- function(x){
   x <- gsub("texas christian athletic league", "tcal", x)
 }
 
-#' Advanced NA omit
+#' Advanced NA omit -- removes "NA", "NULL" and, if remove_blanks=T, ""
 #'
 #' @param
 #' @keywords
