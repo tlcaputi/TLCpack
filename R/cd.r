@@ -18,3 +18,20 @@ cd <- function(directory){
     }
     return(directory) ## also return the working directory
 }
+
+
+#' Outersect
+#'
+#' Takes the non-intersection of two sets
+#' @param
+#' @keywords
+#' @export
+#' @examples
+#' outersect(1:10, 5:15)
+
+
+outersect <- function(x, y, ...) {
+  big.vec <- c(x, y, ...)
+  duplicates <- big.vec[duplicated(big.vec)]
+  setdiff(big.vec, unique(duplicates))
+}
