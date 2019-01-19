@@ -4,7 +4,7 @@
 \alias{predict_expand}
 \title{Predict and Expand}
 \usage{
-predict_expand(reg, new.time)
+predict_expand(reg, new.time, orig.data = NA)
 }
 \description{
 Takes the non-intersection of two sets

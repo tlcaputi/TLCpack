@@ -48,13 +48,6 @@ outersect <- function(x, y, ...) {
 
 predict_expand <- function(reg, new.time, orig.data=NA){
 
-  orig.data <- tmp %>% group_by(year, ageGroup, sex) %>%
-                            summarize(sr = weighted.mean(smoking_indicator, weight, na.rm=T),
-                                      sf = weighted.mean(smoking_frequency, weight, na.rm=T))
-  reg <- lm(sr ~ year, orig.data)
-  new.time = 1994:2018
-
-
   if(length(all.vars(reg$terms))!=2) stop("Regression must be univariate: outcome ~ time")
 
   if(!require(pacman)) install.packages("pacman")
@@ -88,8 +81,7 @@ predict_expand <- function(reg, new.time, orig.data=NA){
     if(!all.equal(
       orig.data[,c(time_var, outcome_var)],
       reg$model[,c(time_var, outcome_var)]
-    )
-  ) { stop("Model data and orig.data not the same") }
+    )) { stop("Model data and orig.data not the same") }
 
     other_variables <- outersect(names(orig.data), all.vars(reg$terms))
     other_data <- orig.data[,c(other_variables, time_var)]
@@ -97,7 +89,5 @@ predict_expand <- function(reg, new.time, orig.data=NA){
   }
 
   return(new_data)
-
-  }
 
 }
