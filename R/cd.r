@@ -76,7 +76,7 @@ predict_expand <- function(reg, new.time, orig.data=NA){
 
   }
 
-  if(!is.na(orig.data)){
+  if(is.data.frame(orig.data)){
 
     if(!all.equal(
       orig.data[,c(time_var, outcome_var)],
