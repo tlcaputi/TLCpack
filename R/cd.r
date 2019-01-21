@@ -61,7 +61,7 @@ predict_expand <- function(reg, new.time, orig.data=NA){
 
   model_data <- reg$model[,c(time_var, outcome_var)]
 
-  if(all(new.time %in% model_data[,time_var])) {
+if(length(setdiff(new.time, model_data[,time_var])) == 0 ) {
 
     warning("Nothing to impute, returning original data")
     new_data <- orig.data %>% arrange(!!parse_quosure(time_var))
@@ -69,7 +69,7 @@ predict_expand <- function(reg, new.time, orig.data=NA){
   } else {
 
   names(model_data) <- c("time", "outcome")
-  missing_time <- tlcPack::outersect(new.time, model_data$time)
+  missing_time <- setdiff(new.time, model_data$time)
   temp_data <- data.frame(time=missing_time, outcome=NA)
   new_data <- rbind.data.frame(model_data, temp_data)
   names(new_data) <- c(time_var, outcome_var)
