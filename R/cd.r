@@ -48,6 +48,9 @@ outersect <- function(x, y, ...) {
 
 predict_expand <- function(reg, new.time, orig.data=NA){
 
+
+
+
   if(length(all.vars(reg$terms))!=2) stop("Regression must be univariate: outcome ~ time")
 
   if(!require(pacman)) install.packages("pacman")
@@ -85,7 +88,7 @@ predict_expand <- function(reg, new.time, orig.data=NA){
 
     other_variables <- outersect(names(orig.data), all.vars(reg$terms))
     other_data <- orig.data[,c(other_variables, time_var)]
-    new_data <- merge(new_data, other_data, by=time_var)
+    new_data <- merge(new_data, other_data, by=time_var, all.x=T)
   }
 
   return(new_data)
