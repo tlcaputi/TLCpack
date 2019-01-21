@@ -91,3 +91,15 @@ predict_expand <- function(reg, new.time, orig.data=NA){
   return(new_data)
 
 }
+
+
+
+#' Read SPSS File
+#'
+#' @param
+#' @keywords
+#' @export
+#' @examples
+#'
+
+read.spss0 <- function(...) suppressWarnings(read.spss(..., to.data.frame=T))
