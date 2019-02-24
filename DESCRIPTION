@@ -27,4 +27,4 @@ Imports:
     haven,
     rlang,
     formula.tools
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
