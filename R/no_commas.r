@@ -35,7 +35,7 @@ c          <- ok.comma(base::c)
 #' @export
 #' @examples
 
-list       <- ok.comma(base::list)
+list0       <- ok.comma(base::list)
 
 #' Make it acceptable for the data.frame() function to end in a comma
 #'
