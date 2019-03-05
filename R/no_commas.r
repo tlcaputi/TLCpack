@@ -44,4 +44,4 @@ list0       <- ok.comma(base::list)
 #' @export
 #' @examples
 
-data.frame <- ok.comma(base::data.frame)
+data.frame0 <- ok.comma(base::data.frame)
