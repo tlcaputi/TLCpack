@@ -26,6 +26,7 @@ ok.comma <- function(FUN) {
 #' @export
 #' @examples
 
+
 c          <- ok.comma(base::c)
 
 #' Make it acceptable for the list() function to end in a comma
