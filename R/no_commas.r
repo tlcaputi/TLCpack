@@ -27,7 +27,7 @@ ok.comma <- function(FUN) {
 #' @examples
 
 
-c          <- ok.comma(base::c)
+c0          <- ok.comma(base::c)
 
 #' Make it acceptable for the list() function to end in a comma
 #'
