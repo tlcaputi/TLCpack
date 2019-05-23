@@ -13,9 +13,6 @@ print("Documentation process successful.")
 
 
 # search()
-
-
-# 
 # library(devtools)
 # install_github("tlcaputi/tlcPack")
 # tlcPack::
