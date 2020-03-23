@@ -2,20 +2,10 @@
 % Please edit documentation in R/sumStats.R
 \name{ss}
 \alias{ss}
-\title{Summary Statistics}
+\title{This function creates a table of summary statistics.}
 \usage{
 ss(x, name = "")
-}
-\arguments{
-\item{x}{Data vector}
-
-\item{name}{The name of the vector you're interested in}
 }
 \description{
 This function creates a table of summary statistics.
 }
-\examples{
- ss(x$gender,name="gender")
-
-}
-\keyword{summary}

@@ -1,15 +1,13 @@
-#' Summary Statistics
-#'
 #' This function creates a table of summary statistics.
-#' @param x Data vector
-#' @param name The name of the vector you're interested in
-#' @keywords summary
+#'
+#' @param
+#' @keywords
 #' @export
 #' @examples
-#'  ss(x$gender,name="gender")
-#'
 
 ss = function(x,name=""){
+
+  print("NEW SS FUNCTION!")
 
   r = function(x) round(x,3) #this makes it easier to round things
   if(is.numeric(x)){ # for variables that are numeric
