@@ -12,7 +12,7 @@ ss = function(x,name=""){
 
     n = sum(!is.na(x)) # I take the N, mean, std dev, sE(mean), and 95%ci
     mn = mean(x,na.rm=T)
-    if(all(x %in% 0:1)) mn * 100
+    if(all(x %in% 0:1 | is.na(x))) mn <- mn * 100
     stdev = sd(x,na.rm=T)
     stderror = sd(x,na.rm=T)/sqrt(sum(!is.na(x)))
     lo95 = mn-1.96*stderror
