@@ -6,8 +6,17 @@
 This detects if a feather file already exists. If it doesn't
 it reads in CSV and saves a feather file. It can read normal CSV or pipe-delimited files. It returns the dataset, so you don't have to read it in again.}
 \usage{
-c2f(in_fn, out_fn = in_fn, clean = F, pipe = F, txt = F,
-  test = F, test_n = 1000, read_in_feather = T, na_rm_nameid = F)
+c2f(
+  in_fn,
+  out_fn = in_fn,
+  clean = F,
+  pipe = F,
+  txt = F,
+  test = F,
+  test_n = 1000,
+  read_in_feather = T,
+  na_rm_nameid = F
+)
 }
 \description{
 CSV to Feather (if necessary) -- this is an omnibus read-data-and-save function. We use feather data files rather than CSVs because feather files are lighter.

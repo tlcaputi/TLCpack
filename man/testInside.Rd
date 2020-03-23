@@ -4,9 +4,14 @@
 \alias{testInside}
 \title{Test what's in the list}
 \usage{
-testInside(data, col = "schoolid",
-  string = "http://co.milesplit.com/teams/<TEST>", sample = 1,
-  start = NULL, test = F)
+testInside(
+  data,
+  col = "schoolid",
+  string = "http://co.milesplit.com/teams/<TEST>",
+  sample = 1,
+  start = NULL,
+  test = F
+)
 }
 \arguments{
 \item{data}{Dataframe}

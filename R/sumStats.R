@@ -1,15 +1,16 @@
 #' Summary Statistics
 #'
-#' This function creates a table of summary statistics. 
-#' @param x Data vector 
+#' This function creates a table of summary statistics.
+#' @param x Data vector
 #' @param name The name of the vector you're interested in
 #' @keywords summary
-#' @export 
+#' @export
 #' @examples
 #'  ss(x$gender,name="gender")
-#'  
-sumStats = function(x,name=""){
-  
+#'
+
+ss = function(x,name=""){
+
   r = function(x) round(x,3) #this makes it easier to round things
   if(is.numeric(x)){ # for variables that are numeric
     n = sum(!is.na(x)) # I take the N, mean, std dev, sE(mean), and 95%ci
@@ -39,7 +40,6 @@ sumStats = function(x,name=""){
       }
     }
     row.names(tab) = NULL # this removes pesky rownames
-    return(tab) 
+    return(tab)
   }
 }
-

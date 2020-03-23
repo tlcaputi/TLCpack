@@ -4,13 +4,25 @@
 \alias{newZelig}
 \title{newZelig}
 \usage{
-newZelig(ind_var_group, ind_var_value = 1, zero_out = NULL, dep_var,
-  other_variables, factor_variables, .id = NULL, .weight = NULL,
-  .nest = NULL, .strata = NULL, total_variables = c(dep_var,
-  zero_out, other_variables, substr(.id, 1, 10)[2], substr(.weight, 1,
-  10)[2], substr(.strata, 1, 10)[2]), dat, sex_interaction = F,
-  totalData = dat[, total_variables], seed = 1234,
-  function_family = binomial(link = "logit"))
+newZelig(
+  ind_var_group,
+  ind_var_value = 1,
+  zero_out = NULL,
+  dep_var,
+  other_variables,
+  factor_variables,
+  .id = NULL,
+  .weight = NULL,
+  .nest = NULL,
+  .strata = NULL,
+  total_variables = c(dep_var, zero_out, other_variables, substr(.id, 1, 10)[2],
+    substr(.weight, 1, 10)[2], substr(.strata, 1, 10)[2]),
+  dat,
+  sex_interaction = F,
+  totalData = dat[, total_variables],
+  seed = 1234,
+  function_family = binomial(link = "logit")
+)
 }
 \arguments{
 \item{ind_var_group}{The factor variable for which you want an estimate}
