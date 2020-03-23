@@ -7,7 +7,7 @@
 
 ss = function(x,name=""){
 
-  r = function(x) round(x,3) #this makes it easier to round things
+  r = function(x) round(x,2) #this makes it easier to round things
   if(is.numeric(x)){ # for variables that are numeric
     n = sum(!is.na(x)) # I take the N, mean, std dev, sE(mean), and 95%ci
     mn = mean(x,na.rm=T)
