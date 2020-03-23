@@ -7,14 +7,17 @@
 
 ss = function(x,name=""){
 
-  r = function(x) round(x,2) #this makes it easier to round things
+  r = function(x) format(x, nsmall=2, digits=2) #this makes it easier to round things
   if(is.numeric(x)){ # for variables that are numeric
 
     n = sum(!is.na(x)) # I take the N, mean, std dev, sE(mean), and 95%ci
     mn = mean(x,na.rm=T)
-    if(all(na.omit(x) %in% 0:1)) mn <- mn * 100
     stdev = sd(x,na.rm=T)
     stderror = sd(x,na.rm=T)/sqrt(sum(!is.na(x)))
+    if(all(na.omit(x) %in% 0:1)){
+      mn <- mn * 100
+      stdev <- NA
+    }
     lo95 = mn-1.96*stderror
     hi95 = mn+1.96*stderror
     return(rbind(c("variable"=name,"N"=r(n),"Mean"=r(mn),"SD"=r(stdev),
